@@ -1,6 +1,6 @@
 import { HashCompare } from "@/domain/carrier/application/cryptography/HashCompare";
+import { HashGenerator } from "@/domain/carrier/application/cryptography/HashGenerator";
 import { Injectable } from "@nestjs/common";
-import { HashGenerator } from "tests/cryptography/HashGenerator";
 import { hash, compare } from 'bcryptjs'
 
 @Injectable()
