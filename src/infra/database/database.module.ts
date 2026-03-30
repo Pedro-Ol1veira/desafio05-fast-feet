@@ -4,6 +4,8 @@ import { CarryingRepository } from "@/domain/carrier/application/repositories/Ca
 import { PrismaCarryngRepository } from "./prisma/repositories/PrismaCarryingRepository";
 import { CustomerRepository } from "@/domain/carrier/application/repositories/CustomerRepository";
 import { PrismaCustomerRepository } from "./prisma/repositories/PrismaCustomerRepository";
+import { AdminRepository } from "@/domain/carrier/application/repositories/AdminRepository";
+import { PrismaAdminRepository } from "./prisma/repositories/PrismaAdminRepository";
 
 
 
@@ -17,12 +19,17 @@ import { PrismaCustomerRepository } from "./prisma/repositories/PrismaCustomerRe
         {
             provide: CustomerRepository,
             useClass: PrismaCustomerRepository
+        },
+        {
+            provide: AdminRepository,
+            useClass: PrismaAdminRepository
         }
     ],
     exports: [
         PrismaService,
         CarryingRepository,
         CustomerRepository,
+        AdminRepository,
     ]
 })
 export class DatabaseModule {}

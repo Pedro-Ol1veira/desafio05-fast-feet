@@ -13,3 +13,8 @@ Content-Type: application/json
     "password": "123456", 
     "role": "CUSTOMER"
 }
+###
+
+# @name create_customer
+POST {{baseUrl}}/sessions
+Content-Type: application/json

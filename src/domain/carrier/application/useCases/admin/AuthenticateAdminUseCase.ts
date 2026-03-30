@@ -1,7 +1,6 @@
 import { Either, left, right } from "@/core/either";
 import { AdminRepository } from "../../repositories/AdminRepository";
 import { Injectable } from "@nestjs/common";
-import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { Encrypter } from "../../cryptography/Encrypter";
 import { HashCompare } from "../../cryptography/HashCompare";
 import { WrongCredentials } from "@/core/errors/errors/WrongCredentials";
