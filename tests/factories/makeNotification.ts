@@ -1,6 +1,6 @@
 import { UniqueEntityId } from "../../src/core/entities/UniqueEntityId";
 import { Notification, NotificationProps } from "../../src/domain/notification/enterprise/entities/Notification";
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/pt_BR';
 
 export function makeNotification(overide: Partial<NotificationProps> = {}, id?: UniqueEntityId) {
     const newNotification = Notification.create({

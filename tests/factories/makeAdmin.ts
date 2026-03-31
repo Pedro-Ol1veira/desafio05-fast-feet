@@ -1,14 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { UniqueEntityId } from "../../src/core/entities/UniqueEntityId";
 import { Admin, AdminProps } from "../../src/domain/carrier/enterprise/entities/Admin";
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/pt_BR';
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { PrismaAdminMapper } from "@/infra/database/prisma/mappers/PrismaAdminMapper";
 
 export function makeAdmin(overide: Partial<AdminProps> = {}, id?: UniqueEntityId) {
     const newAdmin = Admin.create({
         name: faker.person.fullName(),
-        cpf: "12312312323",
+        cpf: faker.string.numeric('###.###.###-##'),
         email: faker.internet.email(),
         password: faker.internet.password(),
         ...overide
