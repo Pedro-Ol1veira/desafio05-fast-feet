@@ -1,9 +1,10 @@
-import { BadRequestException, Body, ConflictException, Controller, HttpCode, Post, UsePipes } from "@nestjs/common";
+import { BadRequestException, Body, ConflictException, Controller, HttpCode, Post, UseGuards, UsePipes } from "@nestjs/common";
 import { z } from 'zod';
 import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
 import { CreateCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/CreateCarryingUseCase";
 import { CreateCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/CreateCustomerUseCase";
 import { UserAlreadyExists } from "@/core/errors/errors/UserAlreadyExists";
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 
 const registerUserBodySchema = z.object({
     name: z.string(),
@@ -16,6 +17,7 @@ const registerUserBodySchema = z.object({
 type RegisterUserBodySchema = z.infer<typeof registerUserBodySchema>;
 
 @Controller("/users")
+@UseGuards(JwtAuthGuard)
 export class RegisterUserController {
 
     constructor(
