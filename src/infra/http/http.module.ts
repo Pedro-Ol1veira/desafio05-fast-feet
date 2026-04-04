@@ -12,6 +12,9 @@ import { EditCustomerUseCase } from "@/domain/carrier/application/useCases/Cutom
 import { DeleteCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/DeleteCarryingUseCase";
 import { DeleteCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/DeleteCustomerUseCase";
 import { DeleteUserController } from "./controller/DeleteUser.controller";
+import { GetCarryingByCpfUseCase } from "@/domain/carrier/application/useCases/Carrying/GetCarryingByCpfUseCase";
+import { GetCustomerByCpfUseCase } from "@/domain/carrier/application/useCases/Cutomer/GetCustomerByCpfUseCase";
+import { GetUserController } from "./controller/GetUser.controller";
 
 
 @Module({
@@ -21,6 +24,7 @@ import { DeleteUserController } from "./controller/DeleteUser.controller";
         AuthenticateController,
         EditUserController,
         DeleteUserController,
+        GetUserController
     ],
     providers: [
         CreateCarryingUseCase,
@@ -29,7 +33,9 @@ import { DeleteUserController } from "./controller/DeleteUser.controller";
         EditCarryingUseCase,
         EditCustomerUseCase,
         DeleteCarryingUseCase,
-        DeleteCustomerUseCase
+        DeleteCustomerUseCase,
+        GetCarryingByCpfUseCase,
+        GetCustomerByCpfUseCase,
     ]
 })
 export class HttpModule {}

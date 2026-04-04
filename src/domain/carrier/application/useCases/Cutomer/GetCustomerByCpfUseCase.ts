@@ -2,6 +2,7 @@ import { Either, left, right } from "@/core/either";
 import { CustomerRepository } from "../../repositories/CustomerRepository";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { Customer } from "../../../enterprise/entities/Customer";
+import { Injectable } from "@nestjs/common";
 
 interface GetCustomerByCpfUseCaseRequest {
     cpf: string;
@@ -14,6 +15,7 @@ type GetCustomerByCpfUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class GetCustomerByCpfUseCase {
 
     constructor(

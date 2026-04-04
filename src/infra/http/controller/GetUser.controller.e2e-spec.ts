@@ -31,20 +31,23 @@ describe('Edit User', () => {
         await app.init()
     })
 
-    test('[DELETE] /users/:id', async () => {
+    test('[GET] /users/:cpf', async () => {
 
         const admin = await adminFactory.makePrismaAdmin({});
         const token = jwt.sign({ sub: admin.id.toString(), role: 'ADMIN' });
 
         const carrying = await carryingFactory.makePrismaCarrying({});
         
-        const response = await request(app.getHttpServer()).delete(`/users/${carrying.id.toString()}`).set('Authorization', `Bearer ${token}`).send({ 
+        const response = await request(app.getHttpServer()).get(`/users/${carrying.cpf}`).set('Authorization', `Bearer ${token}`).send({ 
             role: 'CARRYING'
         });
 
-        expect(response.statusCode).toBe(204);
-
-        const userOnDatabase = await prisma.user.findUnique({ where: {email: 'teste@gmail.com' }});
-        expect(userOnDatabase).toBeNull()
+        
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toEqual({
+            carrying: expect.objectContaining({
+                cpf: carrying.cpf
+            })
+        })
     })
 })

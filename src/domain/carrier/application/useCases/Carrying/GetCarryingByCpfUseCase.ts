@@ -2,6 +2,7 @@ import { Either, left, right } from "@/core/either";
 import { CarryingRepository } from "../../repositories/CarryingRepository";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { Carrying } from "../../../enterprise/entities/Carrying";
+import { Injectable } from "@nestjs/common";
 
 interface GetCarryingByCpfUseCaseRequest {
     cpf: string;
@@ -14,6 +15,7 @@ type GetCarryingByCpfUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class GetCarryingByCpfUseCase {
 
     constructor(
