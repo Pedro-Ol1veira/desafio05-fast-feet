@@ -19,7 +19,7 @@ export class PrismaCarryingMapper {
             id: carrying.id.toString(),
             cpf: carrying.cpf,
             email: carrying.email,
-            name: carrying.email,
+            name: carrying.name,
             password: carrying.password
         }
     }

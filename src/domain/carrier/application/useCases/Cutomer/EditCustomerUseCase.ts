@@ -3,6 +3,7 @@ import { Customer } from "../../../enterprise/entities/Customer";
 import { HashGenerator } from "../../cryptography/HashGenerator";
 import { CustomerRepository } from "../../repositories/CustomerRepository";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
+import { Injectable } from "@nestjs/common";
 
 interface EditCustomerUseCaseRequest {
     id: string;
@@ -18,6 +19,7 @@ type EditCustomerUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class EditCustomerUseCase {
 
     constructor(

@@ -5,17 +5,17 @@ import z from "zod";
 import { Injectable } from "@nestjs/common";
 
 const tokenSchema = z.object({
-    sub: z.uuid()
+    sub: z.uuid(),
+    role: z.enum(['CUSTOMER', 'CARRYING', 'ADMIN'])
 });
 
-type TokenSchema = z.infer<typeof tokenSchema>;
+export type TokenSchema = z.infer<typeof tokenSchema>;
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
 
     constructor(env: EnvService) {
         const publicKey = env.get('JWT_PUBLIC_KEY');
-
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: Buffer.from(publicKey, 'base64'),

@@ -1,9 +1,9 @@
 import { Either, left, right } from "@/core/either";
-import { Carrying, CarryingProps } from "../../../enterprise/entities/Carrying";
+import { Carrying } from "../../../enterprise/entities/Carrying";
 import { HashGenerator } from "../../cryptography/HashGenerator";
 import { CarryingRepository } from "../../repositories/CarryingRepository";
-import { UserAlreadyExists } from "@/core/errors/errors/UserAlreadyExists";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
+import { Injectable } from "@nestjs/common";
 
 interface EditCarryingUseCaseRequest {
     id: string;
@@ -19,6 +19,7 @@ type EditCarryingUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class EditCarryingUseCase {
 
     constructor(

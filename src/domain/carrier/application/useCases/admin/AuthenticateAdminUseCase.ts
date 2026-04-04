@@ -34,7 +34,7 @@ export class AuthenticateAdminUseCase {
         const checkPassword = await this.hashCompare.compare(password, admin.password);
         if(!checkPassword) return left(new WrongCredentials());
 
-        const accessToken = await this.encrypter.encrypt({ sub: admin.id.toString() });
+        const accessToken = await this.encrypter.encrypt({ sub: admin.id.toString(), role: 'ADMIN' });
         
         return right({ accessToken });
     }

@@ -6,18 +6,20 @@ import { JwtService } from "@nestjs/jwt";
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 import { AdminFactory } from "tests/factories/makeAdmin";
+import { CarryingFactory } from "tests/factories/makeCarrying";
 
-describe('Register User', () => {
+describe('Edit User', () => {
 
     let app: INestApplication;
     let prisma: PrismaService;
     let adminFactory: AdminFactory;
+    let carryingFactory: CarryingFactory;
     let jwt: JwtService;
     beforeAll(async () => {
         
         const moduleRef = await Test.createTestingModule({
             imports: [ AppModule, DatabaseModule ],
-            providers: [AdminFactory]
+            providers: [AdminFactory, CarryingFactory]
         }).compile();
 
         app = moduleRef.createNestApplication();
@@ -25,29 +27,32 @@ describe('Register User', () => {
         prisma = moduleRef.get(PrismaService);
         adminFactory = moduleRef.get(AdminFactory);
         jwt = moduleRef.get(JwtService);
+        carryingFactory = moduleRef.get(CarryingFactory);
         await app.init()
     })
 
-    test('[POST] /users', async () => {
+    test('[PUT] /users/:id', async () => {
 
-        const admin = await adminFactory.makePrismaAdmin({
-            cpf:'88877766655'
-        });
+        const admin = await adminFactory.makePrismaAdmin({});
         const token = jwt.sign({ sub: admin.id.toString(), role: 'ADMIN' });
 
-        const response = await request(app.getHttpServer()).post('/users').set('Authorization', `Bearer ${token}`).send({ 
-            cpf: '12312312323', 
-            email: 'teste@gmail.com', 
+        const carrying = await carryingFactory.makePrismaCarrying({});
+        
+        const response = await request(app.getHttpServer()).put(`/users/${carrying.id.toString()}`).set('Authorization', `Bearer ${token}`).send({ 
             name: 'teste', 
+            email: 'teste@gmail.com', 
             password: '123456', 
-            role: 'CUSTOMER'
+            role: 'CARRYING'
         });
 
-        
-        expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(204);
 
         const userOnDatabase = await prisma.user.findUnique({ where: {email: 'teste@gmail.com' }});
         expect(userOnDatabase).toBeTruthy()
-        expect(userOnDatabase?.role).toEqual('CUSTOMER')
+        expect(userOnDatabase).toEqual(expect.objectContaining({
+            name: 'teste',
+            cpf: carrying.cpf
+        }))
+        expect(userOnDatabase?.role).toEqual('CARRYING')
     })
 })
