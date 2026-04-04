@@ -1,6 +1,7 @@
 import { Either, left, right } from "@/core/either";
 import { CustomerRepository } from "../../repositories/CustomerRepository";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
+import { Injectable } from "@nestjs/common";
 
 interface DeleteCustomerUseCaseRequest {
     id: string;
@@ -13,6 +14,7 @@ type DeleteCustomerUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class DeleteCustomerUseCase {
 
     constructor(

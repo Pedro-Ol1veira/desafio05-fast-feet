@@ -1,6 +1,7 @@
 import { Either, left, right } from "@/core/either";
 import { CarryingRepository } from "../../repositories/CarryingRepository";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
+import { Injectable } from "@nestjs/common";
 
 interface DeleteCarryingUseCaseRequest {
     id: string;
@@ -13,6 +14,7 @@ type DeleteCarryingUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class DeleteCarryingUseCase {
 
     constructor(
