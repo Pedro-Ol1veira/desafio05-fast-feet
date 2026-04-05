@@ -29,6 +29,8 @@ import { OrderPickedUpController } from "./controller/OrderPickedUp.controller";
 import { OrderPickedUpUseCase } from "@/domain/carrier/application/useCases/Order/OrderPickedUpUseCase";
 import { OrderDeliveredController } from "./controller/OrderDelivered.controller";
 import { OrderDeliveredUseCase } from "@/domain/carrier/application/useCases/Order/OrderDeliveredUseCase";
+import { ReturnedOrderController } from "./controller/ReturnedOrder.controller";
+import { ReturnedOrderUseCase } from "@/domain/carrier/application/useCases/Order/ReturnedOrderUseCase";
 
 
 @Module({
@@ -46,6 +48,7 @@ import { OrderDeliveredUseCase } from "@/domain/carrier/application/useCases/Ord
         OrderWaitingController,
         OrderPickedUpController,
         OrderDeliveredController,
+        ReturnedOrderController,
     ],
     providers: [
         CreateCarryingUseCase,
@@ -64,6 +67,7 @@ import { OrderDeliveredUseCase } from "@/domain/carrier/application/useCases/Ord
         OrderWaitingUseCase,
         OrderPickedUpUseCase,
         OrderDeliveredUseCase,
+        ReturnedOrderUseCase,
     ]
 })
 export class HttpModule {}
