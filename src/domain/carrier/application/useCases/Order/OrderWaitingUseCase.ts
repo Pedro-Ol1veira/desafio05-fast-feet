@@ -2,6 +2,7 @@ import { Either, left, right } from "@/core/either";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { Order } from "@/domain/carrier/enterprise/entities/Order";
 import { OrderRepository } from "../../repositories/OrderRepository";
+import { Injectable } from "@nestjs/common";
 
 interface OrderWaitingUseCaseRequest {
     id: string;
@@ -14,6 +15,7 @@ type OrderWaitingUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class OrderWaitingUseCase {
 
     constructor(

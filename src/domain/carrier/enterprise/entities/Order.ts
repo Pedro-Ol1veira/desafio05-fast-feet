@@ -7,7 +7,7 @@ export type OrderStatus = "AGUARDANDO" | "RETIRADA" | "ENTREGUE" | "DEVOLVIDA" |
 export interface OrderProps {
     carryingId?: UniqueEntityId | null;
     customerId: UniqueEntityId;
-    status?: OrderStatus;
+    status?: OrderStatus | null;
     address: string; // TODO: mudar essa prop para um agregado e separar o endereço como uma entidade
 }
 
@@ -25,7 +25,7 @@ export class Order extends AggregateRoot<OrderProps> {
         return this.props.address;
     };
 
-    get status() {
+    get status(): OrderStatus | null {
         return this.props.status;
     }
 

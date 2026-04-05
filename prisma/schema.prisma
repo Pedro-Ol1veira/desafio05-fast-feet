@@ -34,7 +34,7 @@ model User {
 
 model Order {
   id         String      @unique @default(uuid())
-  status     OrderStatus @default(AGUARDANDO)
+  status     OrderStatus? 
   address    String
   carrying   User?       @relation("CarryingRelation", fields: [carryingId], references: [id])
   customer   User        @relation("CustomerRelation", fields: [customerId], references: [id])
