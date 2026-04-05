@@ -10,7 +10,7 @@ import { CarryingFactory } from "tests/factories/makeCarrying";
 import { CustomerFactory } from "tests/factories/makeCustomer";
 import { OrderFactory } from "tests/factories/makeOrder";
 
-describe('Order Waiting', () => {
+describe('Order Picked Up', () => {
 
     let app: INestApplication;
     let prisma: PrismaService;
