@@ -26,7 +26,7 @@ describe("Change status of a order to waiting", () => {
         expect(result.isRight()).toBe(true);
         expect(result.value).toEqual({
             order: expect.objectContaining({
-                status: "aguardando"
+                status: "AGUARDANDO"
             })
         });
     });

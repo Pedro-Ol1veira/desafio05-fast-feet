@@ -33,7 +33,7 @@ describe("Edit a new order", () => {
         expect(result.isRight()).toBe(true);
         expect(result.value).toEqual({
             order: expect.objectContaining({
-                status: "retirada",
+                status: "RETIRADA",
                 carryingId: new UniqueEntityId("carrying-1")
             })
         });

@@ -26,7 +26,7 @@ describe("Change status of an order to delivered", () => {
         expect(result.isRight()).toBe(true);
         expect(result.value).toEqual({
             order: expect.objectContaining({
-                status: "entregue"
+                status: "ENTREGUE"
             })
         });
     });

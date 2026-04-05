@@ -34,7 +34,7 @@ describe('On Order Status Changed', () => {
         await waitFor(() => {
             expect(sendNotificationExecuteSpy).toHaveBeenCalled();
             expect(inMemoryNotificationRepository.items[0]).toEqual(expect.objectContaining({
-                title: 'Encomenda aguardando'
+                title: 'Encomenda AGUARDANDO'
             }))
         })
     })
