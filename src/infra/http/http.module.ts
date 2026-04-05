@@ -25,6 +25,8 @@ import { DeleteOrderController } from "./controller/DeleteOrder.controller";
 import { DeleteOrderUseCase } from "@/domain/carrier/application/useCases/Order/DeleteOrderUseCase";
 import { OrderWaitingController } from "./controller/OrderWaiting.controller";
 import { OrderWaitingUseCase } from "@/domain/carrier/application/useCases/Order/OrderWaitingUseCase";
+import { OrderPickedUpController } from "./controller/OrderPickedUp.controller";
+import { OrderPickedUpUseCase } from "@/domain/carrier/application/useCases/Order/OrderPickedUpUseCase";
 
 
 @Module({
@@ -40,6 +42,7 @@ import { OrderWaitingUseCase } from "@/domain/carrier/application/useCases/Order
         GetOrderByIdController,
         DeleteOrderController,
         OrderWaitingController,
+        OrderPickedUpController,
     ],
     providers: [
         CreateCarryingUseCase,
@@ -56,6 +59,7 @@ import { OrderWaitingUseCase } from "@/domain/carrier/application/useCases/Order
         GetOrderByIdUseCase,
         DeleteOrderUseCase,
         OrderWaitingUseCase,
+        OrderPickedUpUseCase,
     ]
 })
 export class HttpModule {}
