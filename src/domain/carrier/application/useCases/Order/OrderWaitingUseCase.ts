@@ -25,7 +25,7 @@ export class OrderWaitingUseCase {
         const order = await this.orderRepository.findById(id);
         if(!order) return left(new ResourseNotFound());
 
-        order.status = "aguardando";
+        order.status = "AGUARDANDO";
         
         await this.orderRepository.save(order);
 

@@ -25,7 +25,7 @@ export class ReturnedOrderUseCase {
         const order = await this.orderRepository.findById(id);
         if(!order) return left(new ResourseNotFound());
 
-        order.status = "devolvida";
+        order.status = "DEVOLVIDA";
         
         await this.orderRepository.save(order);
 

@@ -2,7 +2,7 @@ import { AggregateRoot } from "@/core/entities/AggregateRoot";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
 import { OrderStatusChangedEvent } from "../events/OrderStatusChangedEvent";
 
-export type OrderStatus = "aguardando" | "retirada" | "entregue" | "devolvida" | undefined;
+export type OrderStatus = "AGUARDANDO" | "RETIRADA" | "ENTREGUE" | "DEVOLVIDA" | undefined;
 
 export interface OrderProps {
     carryingId?: UniqueEntityId;

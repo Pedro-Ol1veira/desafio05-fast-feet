@@ -27,7 +27,7 @@ describe('On Order Status Changed', () => {
 
         const order = makeOrder();
         inMemoryOrderRepository.items.push(order);
-        order.status = "aguardando";
+        order.status = "AGUARDANDO";
 
         inMemoryOrderRepository.save(order);
 

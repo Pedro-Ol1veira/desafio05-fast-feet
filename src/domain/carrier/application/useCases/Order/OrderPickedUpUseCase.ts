@@ -32,7 +32,7 @@ export class OrderPickedUpUseCase {
         const carrying = await this.carryingRepository.findById(carryingId);
         if(!carrying) return left(new ResourseNotFound());
         
-        order.status = "retirada";
+        order.status = "RETIRADA";
         order.carryingId = carrying.id;
         await this.orderRepository.save(order);
 

@@ -25,7 +25,7 @@ export class OrderDeliveredUseCase {
         const order = await this.orderRepository.findById(id);
         if(!order) return left(new ResourseNotFound());
 
-        order.status = "entregue";
+        order.status = "ENTREGUE";
         
         await this.orderRepository.save(order);
 
