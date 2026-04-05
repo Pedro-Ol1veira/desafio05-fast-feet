@@ -34,7 +34,7 @@ describe('Order Waiting', () => {
         await app.init()
     })
 
-    test('[PATCH] /orders/:id', async () => {
+    test('[PATCH] /orders/:id/waiting', async () => {
 
         const admin = await adminFactory.makePrismaAdmin();
         const token = jwt.sign({ sub: admin.id.toString(), role: 'ADMIN' });
@@ -48,7 +48,7 @@ describe('Order Waiting', () => {
 
         expect(order.status).toBe(undefined);
         
-        const response = await request(app.getHttpServer()).patch(`/orders/${order.id.toString()}`).set('Authorization', `Bearer ${token}`).send();
+        const response = await request(app.getHttpServer()).patch(`/orders/${order.id.toString()}/waiting`).set('Authorization', `Bearer ${token}`).send();
         
         expect(response.statusCode).toBe(204);
         const orderOnDatabase = await prisma.order.findUnique({ where: { id: order.id.toString() }});

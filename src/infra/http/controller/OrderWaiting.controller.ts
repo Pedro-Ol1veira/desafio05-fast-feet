@@ -2,10 +2,9 @@ import { BadRequestException, Controller, HttpCode, NotFoundException, Param, Pa
 import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { OrderWaitingUseCase } from "@/domain/carrier/application/useCases/Order/OrderWaitingUseCase";
-import { OrderPresenter } from "../presenter/OrderPresenter";
 
 
-@Controller("/orders/:id")
+@Controller("/orders/:id/waiting")
 @UseGuards(JwtAuthGuard)
 export class OrderWaitingController {
 
