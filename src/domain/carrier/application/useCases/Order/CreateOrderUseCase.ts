@@ -5,6 +5,7 @@ import { Order } from "@/domain/carrier/enterprise/entities/Order";
 import { OrderRepository } from "../../repositories/OrderRepository";
 import { CarryingRepository } from "../../repositories/CarryingRepository";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
+import { Injectable } from "@nestjs/common";
 
 interface CreateOrderUseCaseRequest {
     customerId: string;
@@ -18,6 +19,7 @@ type CreateOrderUseCaseResponse = Either<
     }
 >
 
+@Injectable()
 export class CreateOrderUseCase {
 
     constructor(

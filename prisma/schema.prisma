@@ -14,11 +14,30 @@ enum Role {
   ADMIN
 }
 
+enum OrderStatus {
+  AGUARDANDO
+  RETIRADA
+  ENTREGUE
+  DEVOLVIDA
+}
+
 model User {
-  id       String @unique @default(uuid())
-  name     String
-  password String
-  email    String @unique
-  cpf      String @unique
-  role     Role   @default(CUSTOMER)
+  id               String  @unique @default(uuid())
+  name             String
+  password         String
+  email            String  @unique
+  cpf              String  @unique
+  role             Role    @default(CUSTOMER)
+  ordersAsCarrying Order[] @relation("CarryingRelation")
+  ordersAsCustomer Order[] @relation("CustomerRelation")
+}
+
+model Order {
+  id         String      @unique @default(uuid())
+  status     OrderStatus @default(AGUARDANDO)
+  address    String
+  carrying   User?       @relation("CarryingRelation", fields: [carryingId], references: [id])
+  customer   User        @relation("CustomerRelation", fields: [customerId], references: [id])
+  carryingId String?
+  customerId String
 }

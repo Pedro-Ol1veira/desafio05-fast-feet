@@ -15,6 +15,8 @@ import { DeleteUserController } from "./controller/DeleteUser.controller";
 import { GetCarryingByCpfUseCase } from "@/domain/carrier/application/useCases/Carrying/GetCarryingByCpfUseCase";
 import { GetCustomerByCpfUseCase } from "@/domain/carrier/application/useCases/Cutomer/GetCustomerByCpfUseCase";
 import { GetUserController } from "./controller/GetUser.controller";
+import { CreateOrderController } from "./controller/CreateOrder.controller";
+import { CreateOrderUseCase } from "@/domain/carrier/application/useCases/Order/CreateOrderUseCase";
 
 
 @Module({
@@ -24,7 +26,8 @@ import { GetUserController } from "./controller/GetUser.controller";
         AuthenticateController,
         EditUserController,
         DeleteUserController,
-        GetUserController
+        GetUserController,
+        CreateOrderController
     ],
     providers: [
         CreateCarryingUseCase,
@@ -36,6 +39,7 @@ import { GetUserController } from "./controller/GetUser.controller";
         DeleteCustomerUseCase,
         GetCarryingByCpfUseCase,
         GetCustomerByCpfUseCase,
+        CreateOrderUseCase,
     ]
 })
 export class HttpModule {}
