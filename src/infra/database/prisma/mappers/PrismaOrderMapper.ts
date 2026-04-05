@@ -9,7 +9,7 @@ export class PrismaOrderMapper {
             customerId: new UniqueEntityId(raw.customerId),
             carryingId: new UniqueEntityId(raw.carryingId ?? ""),
             status: raw.status
-        })
+        }, new UniqueEntityId(raw.id))
     }
 
     static toPrisma(order: Order): Prisma.OrderUncheckedCreateInput {

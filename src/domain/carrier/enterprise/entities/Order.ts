@@ -5,7 +5,7 @@ import { OrderStatusChangedEvent } from "../events/OrderStatusChangedEvent";
 export type OrderStatus = "AGUARDANDO" | "RETIRADA" | "ENTREGUE" | "DEVOLVIDA" | undefined;
 
 export interface OrderProps {
-    carryingId?: UniqueEntityId;
+    carryingId?: UniqueEntityId | null;
     customerId: UniqueEntityId;
     status?: OrderStatus;
     address: string; // TODO: mudar essa prop para um agregado e separar o endereço como uma entidade
@@ -13,7 +13,7 @@ export interface OrderProps {
 
 export class Order extends AggregateRoot<OrderProps> {
     
-    get carryingId(): UniqueEntityId | undefined {
+    get carryingId(): UniqueEntityId | undefined | null {
         return this.props.carryingId;
     };
     
