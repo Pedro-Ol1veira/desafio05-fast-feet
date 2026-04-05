@@ -19,6 +19,8 @@ import { CreateOrderController } from "./controller/CreateOrder.controller";
 import { CreateOrderUseCase } from "@/domain/carrier/application/useCases/Order/CreateOrderUseCase";
 import { EditOrderController } from "./controller/EditOrder.controller";
 import { EditOrderUseCase } from "@/domain/carrier/application/useCases/Order/EditOrderUseCase";
+import { GetOrderByIdController } from "./controller/GetOrder.controller";
+import { GetOrderByIdUseCase } from "@/domain/carrier/application/useCases/Order/GetOrderByIdUseCase";
 
 
 @Module({
@@ -31,6 +33,7 @@ import { EditOrderUseCase } from "@/domain/carrier/application/useCases/Order/Ed
         GetUserController,
         CreateOrderController,
         EditOrderController,
+        GetOrderByIdController,
     ],
     providers: [
         CreateCarryingUseCase,
@@ -44,6 +47,7 @@ import { EditOrderUseCase } from "@/domain/carrier/application/useCases/Order/Ed
         GetCustomerByCpfUseCase,
         CreateOrderUseCase,
         EditOrderUseCase,
+        GetOrderByIdUseCase
     ]
 })
 export class HttpModule {}
