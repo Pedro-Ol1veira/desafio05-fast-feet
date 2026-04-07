@@ -12,8 +12,8 @@ const authenticateAdminBodySchema = z.object({
 
 type authenticateAdminBodySchema = z.infer<typeof authenticateAdminBodySchema>;
 
-@Controller("/sessions")
-export class AuthenticateController {
+@Controller("/sessions/admin")
+export class AuthenticateAdminController {
 
     constructor(
         private authenticateAdmin: AuthenticateAdminUseCase

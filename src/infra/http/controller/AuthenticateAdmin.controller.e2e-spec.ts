@@ -3,11 +3,11 @@ import { DatabaseModule } from "@/infra/database/database.module";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
 import { INestApplication } from "@nestjs/common";
 import { Test } from '@nestjs/testing';
-import { compare, hash } from "bcryptjs";
+import { hash } from "bcryptjs";
 import request from 'supertest';
 import { AdminFactory } from "tests/factories/makeAdmin";
 
-describe('Register User', () => {
+describe('Authenticate Admin', () => {
 
     let app: INestApplication;
     let prisma: PrismaService;
@@ -27,14 +27,14 @@ describe('Register User', () => {
         await app.init()
     })
 
-    test('[POST] /sessions', async () => {
+    test('[POST] /sessions/admin', async () => {
 
         const admin = await adminFactory.makePrismaAdmin({
             cpf: '12312312323',
             password: await hash('123456', 8),
         });
         
-        const response = await request(app.getHttpServer()).post('/sessions').send({ 
+        const response = await request(app.getHttpServer()).post('/sessions/admin').send({ 
             cpf: '12312312323', 
             password: '123456', 
         });
