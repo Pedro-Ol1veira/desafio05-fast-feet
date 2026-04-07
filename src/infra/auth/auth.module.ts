@@ -4,6 +4,8 @@ import { JwtModule } from "@nestjs/jwt";
 import { EnvService } from "../env/env.service";
 import { ConfigService } from "@nestjs/config";
 import { JwtStrategy } from "./jwt.strategy";
+import { APP_GUARD } from "@nestjs/core";
+import { RoleGuard } from "./RolesGuard";
 
 @Module({
     imports: [ 
@@ -25,6 +27,10 @@ import { JwtStrategy } from "./jwt.strategy";
     providers: [
         JwtStrategy,
         EnvService,
+        // {
+        //     provide: APP_GUARD,
+        //     useClass: RoleGuard
+        // }
     ]
 })
 export class AuthModule {}

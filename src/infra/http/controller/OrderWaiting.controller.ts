@@ -1,11 +1,15 @@
 import { BadRequestException, Controller, HttpCode, NotFoundException, Param, Patch, UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { OrderWaitingUseCase } from "@/domain/carrier/application/useCases/Order/OrderWaitingUseCase";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 
 @Controller("/orders/:id/waiting")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class OrderWaitingController {
 
     constructor(

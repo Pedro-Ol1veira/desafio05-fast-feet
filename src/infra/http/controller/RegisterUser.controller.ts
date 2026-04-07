@@ -4,7 +4,10 @@ import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
 import { CreateCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/CreateCarryingUseCase";
 import { CreateCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/CreateCustomerUseCase";
 import { UserAlreadyExists } from "@/core/errors/errors/UserAlreadyExists";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
 import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const registerUserBodySchema = z.object({
     name: z.string(),
@@ -17,7 +20,8 @@ const registerUserBodySchema = z.object({
 type RegisterUserBodySchema = z.infer<typeof registerUserBodySchema>;
 
 @Controller("/users")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class RegisterUserController {
 
     constructor(

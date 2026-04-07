@@ -1,13 +1,17 @@
 import { BadRequestException, Controller, HttpCode, NotFoundException, Param, Patch, UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { ReturnedOrderUseCase } from "@/domain/carrier/application/useCases/Order/ReturnedOrderUseCase";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 
 @Controller("/orders/:id/returned")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class ReturnedOrderController {
-
+    
     constructor(
         private returnedOrder: ReturnedOrderUseCase,
     ) {}
@@ -17,7 +21,6 @@ export class ReturnedOrderController {
     async handle(
         @Param('id') orderId: string,
     ) {
-        
         const result = await this.returnedOrder.execute({
             id: orderId
         });

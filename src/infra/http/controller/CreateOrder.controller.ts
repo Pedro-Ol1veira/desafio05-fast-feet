@@ -1,12 +1,12 @@
-import { BadRequestException, Body, ConflictException, Controller, HttpCode, NotFoundException, Post, UseGuards, UsePipes } from "@nestjs/common";
+import { BadRequestException, Body, Controller, HttpCode, NotFoundException, Post, UseGuards, UsePipes } from "@nestjs/common";
 import { z } from 'zod';
 import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
-import { CreateCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/CreateCarryingUseCase";
-import { CreateCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/CreateCustomerUseCase";
-import { UserAlreadyExists } from "@/core/errors/errors/UserAlreadyExists";
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { CreateOrderUseCase } from "@/domain/carrier/application/useCases/Order/CreateOrderUseCase";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const createOrderBodySchema = z.object({
     customerId: z.uuid(),
@@ -16,7 +16,8 @@ const createOrderBodySchema = z.object({
 type CreateOrderBodySchema = z.infer<typeof createOrderBodySchema>;
 
 @Controller("/orders")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class CreateOrderController {
 
     constructor(

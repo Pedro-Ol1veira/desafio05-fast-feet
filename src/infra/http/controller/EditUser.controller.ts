@@ -1,10 +1,13 @@
-import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UseGuards, UsePipes } from "@nestjs/common";
+import { BadRequestException, Body, ConflictException, Controller, HttpCode, Param, Put, UseGuards } from "@nestjs/common";
 import { z } from 'zod';
 import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
 import { UserAlreadyExists } from "@/core/errors/errors/UserAlreadyExists";
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { EditCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/EditCustomerUseCase";
 import { EditCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/EditCarryingUseCase";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const editUserBodySchema = z.object({
     name: z.string(),
@@ -16,7 +19,8 @@ const editUserBodySchema = z.object({
 type EditUserBodySchema = z.infer<typeof editUserBodySchema>;
 
 @Controller("/users/:id")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class EditUserController {
 
     constructor(

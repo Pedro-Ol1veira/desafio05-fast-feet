@@ -1,9 +1,12 @@
 import { Body, Controller, Delete, HttpCode, NotFoundException, Param, UseGuards } from "@nestjs/common";
 import { z } from 'zod';
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { DeleteCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/DeleteCustomerUseCase";
 import { DeleteCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/DeleteCarryingUseCase";
 import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const deleteUserBodySchema = z.object({
     role: z.enum(['CARRYING', 'CUSTOMER'])
@@ -12,7 +15,8 @@ const deleteUserBodySchema = z.object({
 type DeleteUserBodySchema = z.infer<typeof deleteUserBodySchema>;
 
 @Controller("/users/:id")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class DeleteUserController {
 
     constructor(

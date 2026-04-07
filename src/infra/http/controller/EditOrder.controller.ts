@@ -1,9 +1,12 @@
-import { BadRequestException, Body, Controller, HttpCode, NotFoundException, Param, Put, UseGuards, UsePipes } from "@nestjs/common";
+import { BadRequestException, Body, Controller, HttpCode, NotFoundException, Param, Put, UseGuards } from "@nestjs/common";
 import { z } from 'zod';
 import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { EditOrderUseCase } from "@/domain/carrier/application/useCases/Order/EditOrderUseCase";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const editOrderBodySchema = z.object({
     carryingId: z.string(),
@@ -14,7 +17,8 @@ const editOrderBodySchema = z.object({
 type EditOrderBodySchema = z.infer<typeof editOrderBodySchema>;
 
 @Controller("/orders/:id")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class EditOrderController {
 
     constructor(

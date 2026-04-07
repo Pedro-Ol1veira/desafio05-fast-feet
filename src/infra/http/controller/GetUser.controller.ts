@@ -1,11 +1,14 @@
 import { Body, Controller, Get, HttpCode, NotFoundException, Param, UseGuards } from "@nestjs/common";
 import { z } from 'zod';
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { ZodValidationPipe } from "../pipes/ZodValidationPipe";
 import { GetCustomerByCpfUseCase } from "@/domain/carrier/application/useCases/Cutomer/GetCustomerByCpfUseCase";
 import { GetCarryingByCpfUseCase } from "@/domain/carrier/application/useCases/Carrying/GetCarryingByCpfUseCase";
 import { CarryingPresenter } from "../presenter/CarryingPresenter";
 import { CustomerPresenter } from "../presenter/CustomerPresenter";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const getUserBodySchema = z.object({
     role: z.enum(['CARRYING', 'CUSTOMER'])
@@ -14,7 +17,8 @@ const getUserBodySchema = z.object({
 type GetUserBodySchema = z.infer<typeof getUserBodySchema>;
 
 @Controller("/users/:cpf")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class GetUserController {
 
     constructor(

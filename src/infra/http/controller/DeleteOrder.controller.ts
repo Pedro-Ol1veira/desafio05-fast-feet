@@ -1,11 +1,15 @@
 import { BadRequestException, Controller, Delete, HttpCode, NotFoundException, Param, UseGuards } from "@nestjs/common";
-import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { DeleteOrderUseCase } from "@/domain/carrier/application/useCases/Order/DeleteOrderUseCase";
+import { Roles } from "@/infra/auth/RolesDecorator";
+import { Role } from '@/infra/auth/RolesDecorator';
+import { JwtAuthGuard } from "@/infra/auth/JwtAuth.guard";
+import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 
 @Controller("/orders/:id")
-@UseGuards(JwtAuthGuard)
+@Roles(Role.Admin)
+@UseGuards(JwtAuthGuard, RoleGuard)
 export class DeleteOrderController {
 
     constructor(

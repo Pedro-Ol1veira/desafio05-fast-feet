@@ -6,7 +6,7 @@ import { Injectable } from "@nestjs/common";
 
 const tokenSchema = z.object({
     sub: z.uuid(),
-    role: z.enum(['CUSTOMER', 'CARRYING', 'ADMIN'])
+    role: z.enum(['CARRYING', 'ADMIN'])
 });
 
 export type TokenSchema = z.infer<typeof tokenSchema>;
