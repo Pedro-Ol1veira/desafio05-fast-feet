@@ -4,7 +4,7 @@ import { RegisterUserController } from "./controller/RegisterUser.controller";
 import { CreateCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/CreateCarryingUseCase";
 import { CreateCustomerUseCase } from "@/domain/carrier/application/useCases/Cutomer/CreateCustomerUseCase";
 import { CryptographyModule } from "../cryptography/cryptography.module";
-import { AuthenticateController } from "./controller/AuthenticateAdmin.controller";
+import { AuthenticateAdminController } from "./controller/AuthenticateAdmin.controller";
 import { AuthenticateAdminUseCase } from "@/domain/carrier/application/useCases/admin/AuthenticateAdminUseCase";
 import { EditUserController } from "./controller/EditUser.controller";
 import { EditCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/EditCarryingUseCase";
@@ -31,13 +31,15 @@ import { OrderDeliveredController } from "./controller/OrderDelivered.controller
 import { OrderDeliveredUseCase } from "@/domain/carrier/application/useCases/Order/OrderDeliveredUseCase";
 import { ReturnedOrderController } from "./controller/ReturnedOrder.controller";
 import { ReturnedOrderUseCase } from "@/domain/carrier/application/useCases/Order/ReturnedOrderUseCase";
+import { AuthenticateCarryingController } from "./controller/AuthenticateCarrying.controller";
+import { AuthenticateCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/AuthenticateCarryingUseCase";
 
 
 @Module({
     imports: [DatabaseModule, CryptographyModule],
     controllers: [
         RegisterUserController,
-        AuthenticateController,
+        AuthenticateAdminController,
         EditUserController,
         DeleteUserController,
         GetUserController,
@@ -49,6 +51,7 @@ import { ReturnedOrderUseCase } from "@/domain/carrier/application/useCases/Orde
         OrderPickedUpController,
         OrderDeliveredController,
         ReturnedOrderController,
+        AuthenticateCarryingController,
     ],
     providers: [
         CreateCarryingUseCase,
@@ -68,6 +71,7 @@ import { ReturnedOrderUseCase } from "@/domain/carrier/application/useCases/Orde
         OrderPickedUpUseCase,
         OrderDeliveredUseCase,
         ReturnedOrderUseCase,
+        AuthenticateCarryingUseCase,
     ]
 })
 export class HttpModule {}
