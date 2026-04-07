@@ -33,6 +33,8 @@ import { ReturnedOrderController } from "./controller/ReturnedOrder.controller";
 import { ReturnedOrderUseCase } from "@/domain/carrier/application/useCases/Order/ReturnedOrderUseCase";
 import { AuthenticateCarryingController } from "./controller/AuthenticateCarrying.controller";
 import { AuthenticateCarryingUseCase } from "@/domain/carrier/application/useCases/Carrying/AuthenticateCarryingUseCase";
+import { FetchCarryingOrdersController } from "./controller/FetchCarryingOrders.controller";
+import { FetchCarryingOrdersUseCase } from "@/domain/carrier/application/useCases/Carrying/FetchCarryingOrdersUseCase";
 
 
 @Module({
@@ -52,6 +54,7 @@ import { AuthenticateCarryingUseCase } from "@/domain/carrier/application/useCas
         OrderDeliveredController,
         ReturnedOrderController,
         AuthenticateCarryingController,
+        FetchCarryingOrdersController,
     ],
     providers: [
         CreateCarryingUseCase,
@@ -72,6 +75,7 @@ import { AuthenticateCarryingUseCase } from "@/domain/carrier/application/useCas
         OrderDeliveredUseCase,
         ReturnedOrderUseCase,
         AuthenticateCarryingUseCase,
+        FetchCarryingOrdersUseCase
     ]
 })
 export class HttpModule {}
