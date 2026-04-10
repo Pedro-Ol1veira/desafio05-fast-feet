@@ -1,6 +1,7 @@
 import { AggregateRoot } from "@/core/entities/AggregateRoot";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
 import { OrderStatusChangedEvent } from "../events/OrderStatusChangedEvent";
+import { Address } from "./Address";
 
 export type OrderStatus = "AGUARDANDO" | "RETIRADA" | "ENTREGUE" | "DEVOLVIDA" | undefined;
 
@@ -8,7 +9,7 @@ export interface OrderProps {
     carryingId?: UniqueEntityId | null;
     customerId: UniqueEntityId;
     status?: OrderStatus | null;
-    address: string; // TODO: mudar essa prop para um agregado e separar o endereço como uma entidade
+    address: Address; // TODO: mudar essa prop para um agregado e separar o endereço como uma entidade
 }
 
 export class Order extends AggregateRoot<OrderProps> {
@@ -21,7 +22,7 @@ export class Order extends AggregateRoot<OrderProps> {
         return this.props.customerId;
     };
 
-    get address() {
+    get address(): Address {
         return this.props.address;
     };
 
@@ -37,7 +38,7 @@ export class Order extends AggregateRoot<OrderProps> {
         this.props.customerId = id;
     };
 
-    set address(address: string) {
+    set address(address: Address) {
         this.props.address = address;
     };
 

@@ -1,24 +1,20 @@
 import { InMemoryCustomerRepository } from "@/../tests/repositories/InMemoryCustomerRepository";
-import { InMemoryCarryingRepository } from "@/../tests/repositories/InMemoryCarryingRepository";
 import { CreateOrderUseCase } from "./CreateOrderUseCase";
 import { InMemoryOrderRepository } from "../../../../../../tests/repositories/InMemoryOrderRepository";
 import { makeCustomer } from "../../../../../../tests/factories/makeCustomer";
-import { makeCarrying } from "../../../../../../tests/factories/makeCarrying";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 
 
 let inMemoryCustomerRepository: InMemoryCustomerRepository;
-let inMemoryCarryingRepository: InMemoryCarryingRepository;
 let inMemoryOrderRepository: InMemoryOrderRepository;
 let sut: CreateOrderUseCase;
 
 describe("Create a new order", () => {
 
     beforeEach(() => {
-        inMemoryCarryingRepository = new InMemoryCarryingRepository();
         inMemoryOrderRepository = new InMemoryOrderRepository();
         inMemoryCustomerRepository = new InMemoryCustomerRepository();
-        sut = new CreateOrderUseCase(inMemoryOrderRepository, inMemoryCarryingRepository, inMemoryCustomerRepository);
+        sut = new CreateOrderUseCase(inMemoryOrderRepository, inMemoryCustomerRepository);
     })
 
     it('should create a new order', async () => {
@@ -26,7 +22,11 @@ describe("Create a new order", () => {
         inMemoryCustomerRepository.items.push(customer)
         
         const result = await sut.execute({
-            address: "fake address",
+            complement: "ap100",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
             customerId: customer.id.toString()
         });
         
@@ -39,7 +39,11 @@ describe("Create a new order", () => {
     it('should not create a new order with a non-existent customer', async () => {
         
         const result = await sut.execute({
-            address: "fake address",
+            complement: "ap100",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
             customerId: "non-existent-id"
         });
 

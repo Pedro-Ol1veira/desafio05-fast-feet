@@ -3,13 +3,17 @@ import { CustomerRepository } from "../../repositories/CustomerRepository";
 import { ResourseNotFound } from "@/core/errors/errors/ResourseNotFound";
 import { Order } from "@/domain/carrier/enterprise/entities/Order";
 import { OrderRepository } from "../../repositories/OrderRepository";
-import { CarryingRepository } from "../../repositories/CarryingRepository";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
 import { Injectable } from "@nestjs/common";
+import { Address } from "@/domain/carrier/enterprise/entities/Address";
 
 interface CreateOrderUseCaseRequest {
     customerId: string;
-    address: string;
+    complement: string;
+    street: string;
+    number: number;
+    latitude: number;
+    longitude: number;
 }
 
 type CreateOrderUseCaseResponse = Either<
@@ -24,14 +28,19 @@ export class CreateOrderUseCase {
 
     constructor(
         private orderRepository: OrderRepository,
-        private carryingRepository: CarryingRepository,
         private customerRepository: CustomerRepository,
     ) {}
 
-    async execute({ address, customerId }: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse> {
+    async execute({ complement, latitude, longitude, number, street, customerId }: CreateOrderUseCaseRequest): Promise<CreateOrderUseCaseResponse> {
         const customer = await this.customerRepository.findById(customerId);
         if(!customer) return left(new ResourseNotFound());
-
+        const address = Address.create({
+            complement,
+            latitude,
+            longitude,
+            number,
+            street,
+        })
         const order = Order.create({
             address,
             customerId: new UniqueEntityId(customerId),
