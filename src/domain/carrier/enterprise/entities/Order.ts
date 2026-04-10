@@ -1,7 +1,7 @@
 import { AggregateRoot } from "@/core/entities/AggregateRoot";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
 import { OrderStatusChangedEvent } from "../events/OrderStatusChangedEvent";
-import { Address } from "./Address";
+import { Address } from "./ValueObjects/Address";
 
 export type OrderStatus = "AGUARDANDO" | "RETIRADA" | "ENTREGUE" | "DEVOLVIDA" | undefined;
 

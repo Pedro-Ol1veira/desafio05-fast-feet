@@ -5,7 +5,7 @@ import { Order } from "@/domain/carrier/enterprise/entities/Order";
 import { OrderRepository } from "../../repositories/OrderRepository";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
 import { Injectable } from "@nestjs/common";
-import { Address } from "@/domain/carrier/enterprise/entities/Address";
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 
 interface CreateOrderUseCaseRequest {
     customerId: string;
