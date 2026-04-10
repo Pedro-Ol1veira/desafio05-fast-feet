@@ -42,8 +42,7 @@ describe('Order Returned', () => {
         const customer = await customerFactory.makePrismaCustomer();
 
         const order = await orderFactory.makePrismaOrder({
-            customerId: customer.id,
-            address: 'teste'
+            customerId: customer.id
         });
 
         expect(order.status).toBe(undefined);

@@ -1,6 +1,6 @@
 
 export class ValueObject<T> {
-    private props: T;
+    protected props: T;
 
     protected constructor(props: T) {
         this.props = props;

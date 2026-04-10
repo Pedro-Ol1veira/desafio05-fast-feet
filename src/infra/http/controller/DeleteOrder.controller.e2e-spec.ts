@@ -1,3 +1,4 @@
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 import { AppModule } from "@/infra/app.module";
 import { DatabaseModule } from "@/infra/database/database.module";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
@@ -42,8 +43,7 @@ describe('Delete Order', () => {
         const customer = await customerFactory.makePrismaCustomer();
 
         const order = await orderFactory.makePrismaOrder({
-            customerId: customer.id,
-            address: 'teste'
+            customerId: customer.id
         });
 
         const response = await request(app.getHttpServer()).delete(`/orders/${order.id.toString()}`).set('Authorization', `Bearer ${token}`).send();

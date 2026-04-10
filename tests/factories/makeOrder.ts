@@ -4,10 +4,17 @@ import { Order, OrderProps } from "../../src/domain/carrier/enterprise/entities/
 import { faker } from '@faker-js/faker/locale/pt_BR';
 import { PrismaOrderMapper } from "@/infra/database/prisma/mappers/PrismaOrderMapper";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 
 export function makeOrder(overide: Partial<OrderProps> = {}, id?: UniqueEntityId) {
     const newOrder = Order.create({
-        address: faker.location.streetAddress(),
+        address: Address.create({
+            complement: faker.location.streetAddress(),
+            latitude: faker.location.latitude(),
+            longitude: faker.location.latitude(),
+            number: Number(faker.location.buildingNumber()),
+            street: faker.location.street()
+        }),
         customerId: new UniqueEntityId(),
         ...overide
     }, id);

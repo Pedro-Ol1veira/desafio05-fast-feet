@@ -40,8 +40,12 @@ describe('Create Order', () => {
 
         
         const response = await request(app.getHttpServer()).post('/orders').set('Authorization', `Bearer ${token}`).send({ 
-            address: "address-1",
-            customerId: customer.id.toString()
+            customerId: customer.id.toString(),
+            complement: "ap100",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
         });
 
         

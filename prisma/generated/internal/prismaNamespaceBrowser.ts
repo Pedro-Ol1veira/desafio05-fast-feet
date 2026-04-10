@@ -86,7 +86,11 @@ export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof User
 export const OrderScalarFieldEnum = {
   id: 'id',
   status: 'status',
-  address: 'address',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  street: 'street',
+  number: 'number',
+  complement: 'complement',
   carryingId: 'carryingId',
   customerId: 'customerId'
 } as const

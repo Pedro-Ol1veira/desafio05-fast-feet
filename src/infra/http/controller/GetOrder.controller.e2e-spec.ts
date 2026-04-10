@@ -1,3 +1,4 @@
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 import { AppModule } from "@/infra/app.module";
 import { DatabaseModule } from "@/infra/database/database.module";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
@@ -43,7 +44,13 @@ describe('Get Order', () => {
 
         const order = await orderFactory.makePrismaOrder({
             customerId: customer.id,
-            address: 'teste'
+            address: Address.create({
+                complement: "ap-1",
+                street: "Rua",
+                latitude: -27.2092052,
+                number: 2,
+                longitude: -49.6401091,
+            })
         });
 
         const response = await request(app.getHttpServer()).get(`/orders/${order.id.toString()}`).set('Authorization', `Bearer ${token}`).send();
@@ -52,7 +59,7 @@ describe('Get Order', () => {
 
         expect(response.body).toEqual({
             order: expect.objectContaining({
-                address: 'teste'
+                complement: "ap-1"
             })
         });
     })

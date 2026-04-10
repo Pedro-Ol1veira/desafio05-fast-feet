@@ -50,17 +50,21 @@ describe('Edit Order', () => {
         });
 
         const response = await request(app.getHttpServer()).put(`/orders/${order.id.toString()}`).set('Authorization', `Bearer ${token}`).send({ 
-            address: "testando editar address",
+            complement: "ap-1",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
             carryingId: carrying.id.toString(),
             customerId: customer.id.toString()
         });
-        
+
         expect(response.statusCode).toBe(204);
 
         const orderOnDatabase = await prisma.order.findFirst({ where: { customerId: customer.id.toString() }});
         expect(orderOnDatabase).toBeTruthy();
         expect(orderOnDatabase).toEqual(expect.objectContaining({
-            address: "testando editar address"
+            complement: "ap-1"
         }));
     })
 })

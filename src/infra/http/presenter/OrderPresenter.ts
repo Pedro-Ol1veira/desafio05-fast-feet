@@ -5,7 +5,11 @@ export class OrderPresenter {
     static toHTTP(order: Order) {
         return {
             id: order.id.toString(),
-            address: order.address,
+            complement: order.address.complement,
+            street: order.address.street,
+            number: order.address.number,
+            latitude: order.address.latitude,
+            longitude: order.address.longitude,
             status: order.status,
             carryingId: order.carryingId,
         }

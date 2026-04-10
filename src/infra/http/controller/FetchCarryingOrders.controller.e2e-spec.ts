@@ -1,3 +1,4 @@
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 import { AppModule } from "@/infra/app.module";
 import { DatabaseModule } from "@/infra/database/database.module";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
@@ -41,10 +42,34 @@ describe('Get Order', () => {
 
         const customer = await customerFactory.makePrismaCustomer();
 
-        await orderFactory.makePrismaOrder({ customerId: customer.id, carryingId: carrying.id, address: 'teste1' });
-        await orderFactory.makePrismaOrder({ customerId: customer.id, carryingId: carrying.id, address: 'teste2' });
-        await orderFactory.makePrismaOrder({ customerId: customer.id, carryingId: carrying.id, address: 'teste3' });
-        await orderFactory.makePrismaOrder({ customerId: customer.id, address: 'teste4' });
+        await orderFactory.makePrismaOrder({ customerId: customer.id, carryingId: carrying.id, address: Address.create({
+            complement: "ap-1",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }) });
+        await orderFactory.makePrismaOrder({ customerId: customer.id, carryingId: carrying.id, address: Address.create({
+            complement: "ap-2",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }) });
+        await orderFactory.makePrismaOrder({ customerId: customer.id, carryingId: carrying.id, address: Address.create({
+            complement: "ap-3",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }) });
+        await orderFactory.makePrismaOrder({ customerId: customer.id, address: Address.create({
+            complement: "ap-4",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }) });
 
         const response = await request(app.getHttpServer()).get(`/carrying/orders/1`).set('Authorization', `Bearer ${token}`).send();
         
@@ -52,9 +77,15 @@ describe('Get Order', () => {
         expect(response.body.orders).toHaveLength(3);
         expect(response.body).toEqual({
             orders: expect.arrayContaining([
-                expect.objectContaining({ address: 'teste1'}),
-                expect.objectContaining({ address: 'teste2'}),
-                expect.objectContaining({ address: 'teste3'}),
+                expect.objectContaining({
+                    complement: "ap-1"
+                }),
+                expect.objectContaining({
+                    complement: "ap-2"
+                }),
+                expect.objectContaining({
+                    complement: "ap-3"
+                }),
             ])
         });
     })

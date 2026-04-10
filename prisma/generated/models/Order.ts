@@ -20,14 +20,32 @@ export type OrderModel = runtime.Types.Result.DefaultSelection<Prisma.$OrderPayl
 
 export type AggregateOrder = {
   _count: OrderCountAggregateOutputType | null
+  _avg: OrderAvgAggregateOutputType | null
+  _sum: OrderSumAggregateOutputType | null
   _min: OrderMinAggregateOutputType | null
   _max: OrderMaxAggregateOutputType | null
+}
+
+export type OrderAvgAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  number: number | null
+}
+
+export type OrderSumAggregateOutputType = {
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  number: number | null
 }
 
 export type OrderMinAggregateOutputType = {
   id: string | null
   status: $Enums.OrderStatus | null
-  address: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  street: string | null
+  number: number | null
+  complement: string | null
   carryingId: string | null
   customerId: string | null
 }
@@ -35,7 +53,11 @@ export type OrderMinAggregateOutputType = {
 export type OrderMaxAggregateOutputType = {
   id: string | null
   status: $Enums.OrderStatus | null
-  address: string | null
+  latitude: runtime.Decimal | null
+  longitude: runtime.Decimal | null
+  street: string | null
+  number: number | null
+  complement: string | null
   carryingId: string | null
   customerId: string | null
 }
@@ -43,17 +65,37 @@ export type OrderMaxAggregateOutputType = {
 export type OrderCountAggregateOutputType = {
   id: number
   status: number
-  address: number
+  latitude: number
+  longitude: number
+  street: number
+  number: number
+  complement: number
   carryingId: number
   customerId: number
   _all: number
 }
 
 
+export type OrderAvgAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  number?: true
+}
+
+export type OrderSumAggregateInputType = {
+  latitude?: true
+  longitude?: true
+  number?: true
+}
+
 export type OrderMinAggregateInputType = {
   id?: true
   status?: true
-  address?: true
+  latitude?: true
+  longitude?: true
+  street?: true
+  number?: true
+  complement?: true
   carryingId?: true
   customerId?: true
 }
@@ -61,7 +103,11 @@ export type OrderMinAggregateInputType = {
 export type OrderMaxAggregateInputType = {
   id?: true
   status?: true
-  address?: true
+  latitude?: true
+  longitude?: true
+  street?: true
+  number?: true
+  complement?: true
   carryingId?: true
   customerId?: true
 }
@@ -69,7 +115,11 @@ export type OrderMaxAggregateInputType = {
 export type OrderCountAggregateInputType = {
   id?: true
   status?: true
-  address?: true
+  latitude?: true
+  longitude?: true
+  street?: true
+  number?: true
+  complement?: true
   carryingId?: true
   customerId?: true
   _all?: true
@@ -113,6 +163,18 @@ export type OrderAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: OrderAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: OrderSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: OrderMinAggregateInputType
@@ -143,6 +205,8 @@ export type OrderGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: OrderCountAggregateInputType | true
+  _avg?: OrderAvgAggregateInputType
+  _sum?: OrderSumAggregateInputType
   _min?: OrderMinAggregateInputType
   _max?: OrderMaxAggregateInputType
 }
@@ -150,10 +214,16 @@ export type OrderGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 export type OrderGroupByOutputType = {
   id: string
   status: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal
+  longitude: runtime.Decimal
+  street: string
+  number: number
+  complement: string
   carryingId: string | null
   customerId: string
   _count: OrderCountAggregateOutputType | null
+  _avg: OrderAvgAggregateOutputType | null
+  _sum: OrderSumAggregateOutputType | null
   _min: OrderMinAggregateOutputType | null
   _max: OrderMaxAggregateOutputType | null
 }
@@ -179,7 +249,11 @@ export type OrderWhereInput = {
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   id?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusNullableFilter<"Order"> | $Enums.OrderStatus | null
-  address?: Prisma.StringFilter<"Order"> | string
+  latitude?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFilter<"Order"> | string
+  number?: Prisma.IntFilter<"Order"> | number
+  complement?: Prisma.StringFilter<"Order"> | string
   carryingId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerId?: Prisma.StringFilter<"Order"> | string
   carrying?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -189,7 +263,11 @@ export type OrderWhereInput = {
 export type OrderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
-  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  number?: Prisma.SortOrder
+  complement?: Prisma.SortOrder
   carryingId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
   carrying?: Prisma.UserOrderByWithRelationInput
@@ -202,7 +280,11 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OrderWhereInput[]
   NOT?: Prisma.OrderWhereInput | Prisma.OrderWhereInput[]
   status?: Prisma.EnumOrderStatusNullableFilter<"Order"> | $Enums.OrderStatus | null
-  address?: Prisma.StringFilter<"Order"> | string
+  latitude?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFilter<"Order"> | string
+  number?: Prisma.IntFilter<"Order"> | number
+  complement?: Prisma.StringFilter<"Order"> | string
   carryingId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerId?: Prisma.StringFilter<"Order"> | string
   carrying?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -212,12 +294,18 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
 export type OrderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrderInput | Prisma.SortOrder
-  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  number?: Prisma.SortOrder
+  complement?: Prisma.SortOrder
   carryingId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
+  _avg?: Prisma.OrderAvgOrderByAggregateInput
   _max?: Prisma.OrderMaxOrderByAggregateInput
   _min?: Prisma.OrderMinOrderByAggregateInput
+  _sum?: Prisma.OrderSumOrderByAggregateInput
 }
 
 export type OrderScalarWhereWithAggregatesInput = {
@@ -226,7 +314,11 @@ export type OrderScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OrderScalarWhereWithAggregatesInput | Prisma.OrderScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusNullableWithAggregatesFilter<"Order"> | $Enums.OrderStatus | null
-  address?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  latitude?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalWithAggregatesFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  number?: Prisma.IntWithAggregatesFilter<"Order"> | number
+  complement?: Prisma.StringWithAggregatesFilter<"Order"> | string
   carryingId?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   customerId?: Prisma.StringWithAggregatesFilter<"Order"> | string
 }
@@ -234,7 +326,11 @@ export type OrderScalarWhereWithAggregatesInput = {
 export type OrderCreateInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
 }
@@ -242,7 +338,11 @@ export type OrderCreateInput = {
 export type OrderUncheckedCreateInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   carryingId?: string | null
   customerId: string
 }
@@ -250,7 +350,11 @@ export type OrderUncheckedCreateInput = {
 export type OrderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
 }
@@ -258,7 +362,11 @@ export type OrderUpdateInput = {
 export type OrderUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -266,7 +374,11 @@ export type OrderUncheckedUpdateInput = {
 export type OrderCreateManyInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   carryingId?: string | null
   customerId: string
 }
@@ -274,13 +386,21 @@ export type OrderCreateManyInput = {
 export type OrderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrderUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -298,15 +418,29 @@ export type OrderOrderByRelationAggregateInput = {
 export type OrderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  number?: Prisma.SortOrder
+  complement?: Prisma.SortOrder
   carryingId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+}
+
+export type OrderAvgOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  number?: Prisma.SortOrder
 }
 
 export type OrderMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  number?: Prisma.SortOrder
+  complement?: Prisma.SortOrder
   carryingId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
 }
@@ -314,9 +448,19 @@ export type OrderMaxOrderByAggregateInput = {
 export type OrderMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  address?: Prisma.SortOrder
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  street?: Prisma.SortOrder
+  number?: Prisma.SortOrder
+  complement?: Prisma.SortOrder
   carryingId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
+}
+
+export type OrderSumOrderByAggregateInput = {
+  latitude?: Prisma.SortOrder
+  longitude?: Prisma.SortOrder
+  number?: Prisma.SortOrder
 }
 
 export type OrderCreateNestedManyWithoutCarryingInput = {
@@ -407,6 +551,22 @@ export type NullableEnumOrderStatusFieldUpdateOperationsInput = {
   set?: $Enums.OrderStatus | null
 }
 
+export type DecimalFieldUpdateOperationsInput = {
+  set?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
+  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
@@ -414,14 +574,22 @@ export type NullableStringFieldUpdateOperationsInput = {
 export type OrderCreateWithoutCarryingInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
 }
 
 export type OrderUncheckedCreateWithoutCarryingInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   customerId: string
 }
 
@@ -438,14 +606,22 @@ export type OrderCreateManyCarryingInputEnvelope = {
 export type OrderCreateWithoutCustomerInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
 }
 
 export type OrderUncheckedCreateWithoutCustomerInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   carryingId?: string | null
 }
 
@@ -481,7 +657,11 @@ export type OrderScalarWhereInput = {
   NOT?: Prisma.OrderScalarWhereInput | Prisma.OrderScalarWhereInput[]
   id?: Prisma.StringFilter<"Order"> | string
   status?: Prisma.EnumOrderStatusNullableFilter<"Order"> | $Enums.OrderStatus | null
-  address?: Prisma.StringFilter<"Order"> | string
+  latitude?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFilter<"Order"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFilter<"Order"> | string
+  number?: Prisma.IntFilter<"Order"> | number
+  complement?: Prisma.StringFilter<"Order"> | string
   carryingId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerId?: Prisma.StringFilter<"Order"> | string
 }
@@ -505,56 +685,88 @@ export type OrderUpdateManyWithWhereWithoutCustomerInput = {
 export type OrderCreateManyCarryingInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   customerId: string
 }
 
 export type OrderCreateManyCustomerInput = {
   id?: string
   status?: $Enums.OrderStatus | null
-  address: string
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
   carryingId?: string | null
 }
 
 export type OrderUpdateWithoutCarryingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutCarryingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrderUncheckedUpdateManyWithoutCarryingInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrderUpdateWithoutCustomerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutCustomerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OrderUncheckedUpdateManyWithoutCustomerInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
-  address?: Prisma.StringFieldUpdateOperationsInput | string
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -563,7 +775,11 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
 export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   status?: boolean
-  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  street?: boolean
+  number?: boolean
+  complement?: boolean
   carryingId?: boolean
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -573,7 +789,11 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   status?: boolean
-  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  street?: boolean
+  number?: boolean
+  complement?: boolean
   carryingId?: boolean
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -583,7 +803,11 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   status?: boolean
-  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  street?: boolean
+  number?: boolean
+  complement?: boolean
   carryingId?: boolean
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -593,12 +817,16 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type OrderSelectScalar = {
   id?: boolean
   status?: boolean
-  address?: boolean
+  latitude?: boolean
+  longitude?: boolean
+  street?: boolean
+  number?: boolean
+  complement?: boolean
   carryingId?: boolean
   customerId?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "address" | "carryingId" | "customerId", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "latitude" | "longitude" | "street" | "number" | "complement" | "carryingId" | "customerId", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -621,7 +849,11 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     status: $Enums.OrderStatus | null
-    address: string
+    latitude: runtime.Decimal
+    longitude: runtime.Decimal
+    street: string
+    number: number
+    complement: string
     carryingId: string | null
     customerId: string
   }, ExtArgs["result"]["order"]>
@@ -1051,7 +1283,11 @@ export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Ty
 export interface OrderFieldRefs {
   readonly id: Prisma.FieldRef<"Order", 'String'>
   readonly status: Prisma.FieldRef<"Order", 'OrderStatus'>
-  readonly address: Prisma.FieldRef<"Order", 'String'>
+  readonly latitude: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly longitude: Prisma.FieldRef<"Order", 'Decimal'>
+  readonly street: Prisma.FieldRef<"Order", 'String'>
+  readonly number: Prisma.FieldRef<"Order", 'Int'>
+  readonly complement: Prisma.FieldRef<"Order", 'String'>
   readonly carryingId: Prisma.FieldRef<"Order", 'String'>
   readonly customerId: Prisma.FieldRef<"Order", 'String'>
 }

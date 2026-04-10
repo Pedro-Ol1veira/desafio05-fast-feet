@@ -9,7 +9,7 @@ export interface OrderProps {
     carryingId?: UniqueEntityId | null;
     customerId: UniqueEntityId;
     status?: OrderStatus | null;
-    address: Address; // TODO: mudar essa prop para um agregado e separar o endereço como uma entidade
+    address: Address;
 }
 
 export class Order extends AggregateRoot<OrderProps> {

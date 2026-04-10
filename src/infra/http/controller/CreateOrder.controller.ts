@@ -10,7 +10,15 @@ import { RoleGuard } from "@/infra/auth/RolesGuard";
 
 const createOrderBodySchema = z.object({
     customerId: z.uuid(),
-    address: z.string()
+    latitude: z.coerce.number().refine((value) => {
+      return Math.abs(value) <= 90;
+    }),
+    longitude: z.coerce.number().refine((value) => {
+      return Math.abs(value) <= 180;
+    }),
+    street: z.string(),
+    number: z.coerce.number(),
+    complement: z.string(),
 });
 
 type CreateOrderBodySchema = z.infer<typeof createOrderBodySchema>;
@@ -30,10 +38,14 @@ export class CreateOrderController {
     async handle(
         @Body() body: CreateOrderBodySchema
     ) {
-        const { customerId, address } = body;
+        const { customerId, complement, latitude, longitude, number, street } = body;
 
         const result = await this.createOrder.execute({
-            address,
+            complement,
+            latitude,
+            longitude,
+            number,
+            street,
             customerId
         });
 

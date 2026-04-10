@@ -4,6 +4,7 @@ import { InMemoryOrderRepository } from "../../../../../../tests/repositories/In
 import { InMemoryCarryingRepository } from "../../../../../../tests/repositories/InMemoryCarryingRepository";
 import { UniqueEntityId } from "@/core/entities/UniqueEntityId";
 import { makeOrder } from "../../../../../../tests/factories/makeOrder";
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 
 
 let inMemoryOrderRepository: InMemoryOrderRepository;
@@ -20,9 +21,27 @@ describe("Fetch carrying orders", () => {
 
     it('should fetch carrying orders', async () => {
         inMemoryCarryingRepository.items.push(makeCarrying({}, new UniqueEntityId('carrying-1'))); 
-        inMemoryOrderRepository.items.push(makeOrder({address: "address1", carryingId: new UniqueEntityId('carrying-1')}));
-        inMemoryOrderRepository.items.push(makeOrder({address: "address2", carryingId: new UniqueEntityId('carrying-1')}));
-        inMemoryOrderRepository.items.push(makeOrder({address: "address3", carryingId: new UniqueEntityId('carrying-1')}));
+        inMemoryOrderRepository.items.push(makeOrder({address: Address.create({
+            complement: "ap1",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }), carryingId: new UniqueEntityId('carrying-1')}));
+        inMemoryOrderRepository.items.push(makeOrder({address: Address.create({
+            complement: "ap2",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }), carryingId: new UniqueEntityId('carrying-1')}));
+        inMemoryOrderRepository.items.push(makeOrder({address: Address.create({
+            complement: "ap3",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
+        }), carryingId: new UniqueEntityId('carrying-1')}));
 
         const result = await sut.execute({
             carryingId: 'carrying-1',
@@ -32,9 +51,15 @@ describe("Fetch carrying orders", () => {
         expect(result.isRight()).toBe(true);
         expect(result.value).toEqual(expect.objectContaining({
             orders: expect.arrayContaining([
-                expect.objectContaining({ address: "address1"}),
-                expect.objectContaining({ address: "address2"}),
-                expect.objectContaining({ address: "address3"}),
+                expect.objectContaining({ 
+                    address: expect.objectContaining({ complement: "ap1" })
+                }),
+                expect.objectContaining({ 
+                    address: expect.objectContaining({ complement: "ap2" })
+                }),
+                expect.objectContaining({ 
+                    address: expect.objectContaining({ complement: "ap3" })
+                }),
             ]) 
         }));
     });
@@ -43,7 +68,13 @@ describe("Fetch carrying orders", () => {
         inMemoryCarryingRepository.items.push(makeCarrying({}, new UniqueEntityId('carrying-1'))); 
 
         for(let i = 1; i <= 22; i++) {
-            inMemoryOrderRepository.items.push(makeOrder({address: `address${i}`, carryingId: new UniqueEntityId('carrying-1')}));
+            inMemoryOrderRepository.items.push(makeOrder({address: Address.create({
+                complement: `ap-${i}`,
+                number: 2,
+                street: "Rua",
+                latitude: -27.2092052,
+                longitude: -49.6401091,
+            }), carryingId: new UniqueEntityId('carrying-1')}));
         }
         
         const result = await sut.execute({
@@ -54,8 +85,14 @@ describe("Fetch carrying orders", () => {
         expect(result.isRight()).toBe(true);
         expect(result.value).toEqual(expect.objectContaining({
             orders: expect.arrayContaining([
-                expect.objectContaining({ address: "address21"}),
-                expect.objectContaining({ address: "address22"}),
+                expect.objectContaining({ address: expect.objectContaining({
+                    complement: "ap-21"
+                }) 
+            }),
+                expect.objectContaining({ address: expect.objectContaining({
+                    complement: "ap-22"
+                }) 
+            }),
             ])
         }));
     });

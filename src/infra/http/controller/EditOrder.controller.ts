@@ -11,7 +11,15 @@ import { RoleGuard } from "@/infra/auth/RolesGuard";
 const editOrderBodySchema = z.object({
     carryingId: z.string(),
     customerId: z.string(),
-    address: z.string(),
+    latitude: z.coerce.number().refine((value) => {
+      return Math.abs(value) <= 90;
+    }),
+    longitude: z.coerce.number().refine((value) => {
+      return Math.abs(value) <= 180;
+    }),
+    street: z.string(),
+    number: z.coerce.number(),
+    complement: z.string(),
 });
 
 type EditOrderBodySchema = z.infer<typeof editOrderBodySchema>;
@@ -31,11 +39,15 @@ export class EditOrderController {
         @Body(new ZodValidationPipe(editOrderBodySchema)) body: EditOrderBodySchema,
         @Param('id') orderId: string,
     ) {
-        const { customerId, address, carryingId } = body;
+        const { customerId, complement, latitude, longitude, number, street, carryingId } = body;
         
         const result = await this.editOrder.execute({
             orderId,
-            address,
+            complement,
+            latitude,
+            longitude,
+            number,
+            street,
             carryingId,
             customerId
         });

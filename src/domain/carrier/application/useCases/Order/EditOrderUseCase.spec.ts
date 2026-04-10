@@ -31,7 +31,11 @@ describe("Edit a new order", () => {
         inMemoryCustomerRepository.items.push(makeCustomer({}, new UniqueEntityId("customer-1"))) 
 
         const result = await sut.execute({
-            address: "fake address",
+            complement: "ap100",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
             carryingId: "carrying-1",
             customerId: "customer-1",
             orderId: order.id.toString(),
@@ -47,7 +51,11 @@ describe("Edit a new order", () => {
     it('should not edit a non-existent order', async () => {
         
         const result = await sut.execute({
-            address: "fake address",
+            complement: "ap100",
+            number: 2,
+            street: "Rua",
+            latitude: -27.2092052,
+            longitude: -49.6401091,
             carryingId: "carrying-1",
             customerId: "customer-1",
             orderId: "non-existent-id",

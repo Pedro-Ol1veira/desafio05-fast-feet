@@ -1,3 +1,4 @@
+import { Address } from "@/domain/carrier/enterprise/entities/ValueObjects/Address";
 import { AppModule } from "@/infra/app.module";
 import { DatabaseModule } from "@/infra/database/database.module";
 import { PrismaService } from "@/infra/database/prisma/prisma.service";
@@ -45,8 +46,7 @@ describe('Order Picked Up', () => {
         const customer = await customerFactory.makePrismaCustomer();
         const carrying = await carryingFactory.makePrismaCarrying();
         const order = await orderFactory.makePrismaOrder({
-            customerId: customer.id,
-            address: 'teste'
+            customerId: customer.id
         });
 
         expect(order.status).toBe(undefined);

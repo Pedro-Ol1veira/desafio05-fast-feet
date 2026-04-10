@@ -33,11 +33,15 @@ model User {
 }
 
 model Order {
-  id         String      @unique @default(uuid())
-  status     OrderStatus? 
-  address    String
-  carrying   User?       @relation("CarryingRelation", fields: [carryingId], references: [id])
-  customer   User        @relation("CustomerRelation", fields: [customerId], references: [id])
+  id         String       @unique @default(uuid())
+  status     OrderStatus?
+  latitude   Decimal
+  longitude  Decimal
+  street     String
+  number     Int
+  complement String
+  carrying   User?        @relation("CarryingRelation", fields: [carryingId], references: [id])
+  customer   User         @relation("CustomerRelation", fields: [customerId], references: [id])
   carryingId String?
   customerId String
 }

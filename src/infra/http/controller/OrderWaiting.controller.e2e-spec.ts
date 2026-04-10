@@ -43,7 +43,6 @@ describe('Order Waiting', () => {
 
         const order = await orderFactory.makePrismaOrder({
             customerId: customer.id,
-            address: 'teste'
         });
 
         expect(order.status).toBe(undefined);
