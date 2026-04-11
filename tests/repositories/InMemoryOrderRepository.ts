@@ -1,7 +1,8 @@
 import { DomainEvents } from "@/core/events/DomainEvents";
-import { OrderRepository } from "@/domain/carrier/application/repositories/OrderRepository";
+import { FindManyNearByParams, OrderRepository } from "@/domain/carrier/application/repositories/OrderRepository";
 import { PaginationParams } from "@/domain/carrier/application/repositories/PaginationParams";
 import { Order } from "@/domain/carrier/enterprise/entities/Order";
+import { getDistanceBetweenCoordinates } from "tests/GetDistanceBetweenCoordinates";
 
 export class InMemoryOrderRepository extends OrderRepository {
     
@@ -38,5 +39,19 @@ export class InMemoryOrderRepository extends OrderRepository {
             .slice((page - 1) * 20, page * 20);
 
         return orders;
+    }
+
+    async findManyOrdersNearBy(params: FindManyNearByParams, carryingId: string): Promise<Order[]> {
+        return this.items.filter(item => {
+            const distance = getDistanceBetweenCoordinates({
+                latitude: params.latitude,
+                longitude: params.longitude,
+            }, {
+                latitude: item.address.latitude,
+                longitude: item.address.longitude,
+            })
+
+            return distance < 10 && item.carryingId?.toString() === carryingId;
+        })
     }
 }
