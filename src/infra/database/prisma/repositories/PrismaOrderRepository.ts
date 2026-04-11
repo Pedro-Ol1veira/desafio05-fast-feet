@@ -1,10 +1,11 @@
-import { OrderRepository } from "@/domain/carrier/application/repositories/OrderRepository";
+import { FindManyNearByParams, OrderRepository } from "@/domain/carrier/application/repositories/OrderRepository";
 import { PaginationParams } from "@/domain/carrier/application/repositories/PaginationParams";
 import { Order } from "@/domain/carrier/enterprise/entities/Order";
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../prisma.service";
 import { PrismaOrderMapper } from "../mappers/PrismaOrderMapper";
-
+import { Prisma } from "prisma/generated/client";
+import { Order as PrismaOrder } from "prisma/generated/client";
 
 @Injectable()
 export class PrismaOrderRepository implements OrderRepository {
@@ -62,4 +63,13 @@ export class PrismaOrderRepository implements OrderRepository {
         return orders.map(PrismaOrderMapper.toDomain);
     }
 
+    async findManyOrdersNearBy({ latitude, longitude }: FindManyNearByParams, carryingId: string): Promise<Order[]> {
+        const schema = new URL(process.env.DATABASE_URL ?? "").searchParams.get('schema');
+        const orders = await this.prisma.$queryRaw<PrismaOrder[]>`
+            SELECT * from ${Prisma.raw(`"${schema}"."Order"`)}
+            WHERE ( 6371 * acos( cos( radians(${latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(${longitude}) ) + sin( radians(${latitude}) ) * sin( radians( latitude ) ) ) ) <= 10
+        `;
+
+        return orders.map(PrismaOrderMapper.toDomain);
+    }
 }
