@@ -8,6 +8,8 @@ import { AdminRepository } from "@/domain/carrier/application/repositories/Admin
 import { PrismaAdminRepository } from "./prisma/repositories/PrismaAdminRepository";
 import { OrderRepository } from "@/domain/carrier/application/repositories/OrderRepository";
 import { PrismaOrderRepository } from "./prisma/repositories/PrismaOrderRepository";
+import { NotificationRepository } from "@/domain/notification/application/repositories/NotificationRepository";
+import { PrismaNotificationRepository } from "./prisma/repositories/PrismaNotificationRepository";
 
 
 
@@ -29,6 +31,11 @@ import { PrismaOrderRepository } from "./prisma/repositories/PrismaOrderReposito
         {
             provide: OrderRepository,
             useClass: PrismaOrderRepository,
+        },
+
+        {
+            provide: NotificationRepository,
+            useClass: PrismaNotificationRepository,
         }
     ],
     exports: [
@@ -36,7 +43,8 @@ import { PrismaOrderRepository } from "./prisma/repositories/PrismaOrderReposito
         CarryingRepository,
         CustomerRepository,
         AdminRepository,
-        OrderRepository
+        OrderRepository,
+        NotificationRepository,
     ]
 })
 export class DatabaseModule {}

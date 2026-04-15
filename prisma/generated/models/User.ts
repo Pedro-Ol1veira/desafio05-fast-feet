@@ -192,6 +192,7 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   ordersAsCarrying?: Prisma.OrderListRelationFilter
   ordersAsCustomer?: Prisma.OrderListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -203,6 +204,7 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   ordersAsCarrying?: Prisma.OrderOrderByRelationAggregateInput
   ordersAsCustomer?: Prisma.OrderOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -217,6 +219,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   ordersAsCarrying?: Prisma.OrderListRelationFilter
   ordersAsCustomer?: Prisma.OrderListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "email" | "cpf">
 
 export type UserOrderByWithAggregationInput = {
@@ -252,6 +255,7 @@ export type UserCreateInput = {
   role?: $Enums.Role
   ordersAsCarrying?: Prisma.OrderCreateNestedManyWithoutCarryingInput
   ordersAsCustomer?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -263,6 +267,7 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.Role
   ordersAsCarrying?: Prisma.OrderUncheckedCreateNestedManyWithoutCarryingInput
   ordersAsCustomer?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
 }
 
 export type UserUpdateInput = {
@@ -274,6 +279,7 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ordersAsCarrying?: Prisma.OrderUpdateManyWithoutCarryingNestedInput
   ordersAsCustomer?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -285,6 +291,7 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ordersAsCarrying?: Prisma.OrderUncheckedUpdateManyWithoutCarryingNestedInput
   ordersAsCustomer?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -389,6 +396,20 @@ export type UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOrdersAsCustomerInput, Prisma.UserUpdateWithoutOrdersAsCustomerInput>, Prisma.UserUncheckedUpdateWithoutOrdersAsCustomerInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type UserCreateWithoutOrdersAsCarryingInput = {
   id?: string
   name: string
@@ -397,6 +418,7 @@ export type UserCreateWithoutOrdersAsCarryingInput = {
   cpf: string
   role?: $Enums.Role
   ordersAsCustomer?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
 }
 
 export type UserUncheckedCreateWithoutOrdersAsCarryingInput = {
@@ -407,6 +429,7 @@ export type UserUncheckedCreateWithoutOrdersAsCarryingInput = {
   cpf: string
   role?: $Enums.Role
   ordersAsCustomer?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
 }
 
 export type UserCreateOrConnectWithoutOrdersAsCarryingInput = {
@@ -422,6 +445,7 @@ export type UserCreateWithoutOrdersAsCustomerInput = {
   cpf: string
   role?: $Enums.Role
   ordersAsCarrying?: Prisma.OrderCreateNestedManyWithoutCarryingInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutRecipientInput
 }
 
 export type UserUncheckedCreateWithoutOrdersAsCustomerInput = {
@@ -432,6 +456,7 @@ export type UserUncheckedCreateWithoutOrdersAsCustomerInput = {
   cpf: string
   role?: $Enums.Role
   ordersAsCarrying?: Prisma.OrderUncheckedCreateNestedManyWithoutCarryingInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutRecipientInput
 }
 
 export type UserCreateOrConnectWithoutOrdersAsCustomerInput = {
@@ -458,6 +483,7 @@ export type UserUpdateWithoutOrdersAsCarryingInput = {
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ordersAsCustomer?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersAsCarryingInput = {
@@ -468,6 +494,7 @@ export type UserUncheckedUpdateWithoutOrdersAsCarryingInput = {
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ordersAsCustomer?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
 }
 
 export type UserUpsertWithoutOrdersAsCustomerInput = {
@@ -489,6 +516,7 @@ export type UserUpdateWithoutOrdersAsCustomerInput = {
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ordersAsCarrying?: Prisma.OrderUpdateManyWithoutCarryingNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutRecipientNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOrdersAsCustomerInput = {
@@ -499,6 +527,67 @@ export type UserUncheckedUpdateWithoutOrdersAsCustomerInput = {
   cpf?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   ordersAsCarrying?: Prisma.OrderUncheckedUpdateManyWithoutCarryingNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutRecipientNestedInput
+}
+
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  password: string
+  email: string
+  cpf: string
+  role?: $Enums.Role
+  ordersAsCarrying?: Prisma.OrderCreateNestedManyWithoutCarryingInput
+  ordersAsCustomer?: Prisma.OrderCreateNestedManyWithoutCustomerInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  name: string
+  password: string
+  email: string
+  cpf: string
+  role?: $Enums.Role
+  ordersAsCarrying?: Prisma.OrderUncheckedCreateNestedManyWithoutCarryingInput
+  ordersAsCustomer?: Prisma.OrderUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  ordersAsCarrying?: Prisma.OrderUpdateManyWithoutCarryingNestedInput
+  ordersAsCustomer?: Prisma.OrderUpdateManyWithoutCustomerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  cpf?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  ordersAsCarrying?: Prisma.OrderUncheckedUpdateManyWithoutCarryingNestedInput
+  ordersAsCustomer?: Prisma.OrderUncheckedUpdateManyWithoutCustomerNestedInput
 }
 
 
@@ -509,11 +598,13 @@ export type UserUncheckedUpdateWithoutOrdersAsCustomerInput = {
 export type UserCountOutputType = {
   ordersAsCarrying: number
   ordersAsCustomer: number
+  notifications: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ordersAsCarrying?: boolean | UserCountOutputTypeCountOrdersAsCarryingArgs
   ordersAsCustomer?: boolean | UserCountOutputTypeCountOrdersAsCustomerArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -540,6 +631,13 @@ export type UserCountOutputTypeCountOrdersAsCustomerArgs<ExtArgs extends runtime
   where?: Prisma.OrderWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -550,6 +648,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   ordersAsCarrying?: boolean | Prisma.User$ordersAsCarryingArgs<ExtArgs>
   ordersAsCustomer?: boolean | Prisma.User$ordersAsCustomerArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -584,6 +683,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   ordersAsCarrying?: boolean | Prisma.User$ordersAsCarryingArgs<ExtArgs>
   ordersAsCustomer?: boolean | Prisma.User$ordersAsCustomerArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -594,6 +694,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     ordersAsCarrying: Prisma.$OrderPayload<ExtArgs>[]
     ordersAsCustomer: Prisma.$OrderPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -998,6 +1099,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   ordersAsCarrying<T extends Prisma.User$ordersAsCarryingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersAsCarryingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ordersAsCustomer<T extends Prisma.User$ordersAsCustomerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersAsCustomerArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1471,6 +1573,30 @@ export type User$ordersAsCustomerArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.OrderScalarFieldEnum | Prisma.OrderScalarFieldEnum[]
+}
+
+/**
+ * User.notifications
+ */
+export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

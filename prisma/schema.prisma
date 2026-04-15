@@ -22,14 +22,15 @@ enum OrderStatus {
 }
 
 model User {
-  id               String  @unique @default(uuid())
+  id               String         @unique @default(uuid())
   name             String
   password         String
-  email            String  @unique
-  cpf              String  @unique
-  role             Role    @default(CUSTOMER)
-  ordersAsCarrying Order[] @relation("CarryingRelation")
-  ordersAsCustomer Order[] @relation("CustomerRelation")
+  email            String         @unique
+  cpf              String         @unique
+  role             Role           @default(CUSTOMER)
+  ordersAsCarrying Order[]        @relation("CarryingRelation")
+  ordersAsCustomer Order[]        @relation("CustomerRelation")
+  notifications    Notification[]
 }
 
 model Order {
@@ -44,4 +45,15 @@ model Order {
   customer   User         @relation("CustomerRelation", fields: [customerId], references: [id])
   carryingId String?
   customerId String
+}
+
+model Notification {
+  id          String    @unique @default(uuid())
+  title       String
+  content     String
+  createdAt   DateTime  @default(now())
+  readAt      DateTime?
+  recipientId String
+  
+  recipient   User      @relation(fields: [recipientId], references: [id])
 }

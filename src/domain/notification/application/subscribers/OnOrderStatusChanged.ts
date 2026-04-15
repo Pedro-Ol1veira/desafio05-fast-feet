@@ -2,7 +2,9 @@ import { DomainEvents } from "@/core/events/DomainEvents";
 import { EventHandler } from "@/core/events/EventHandler";
 import { OrderStatusChangedEvent } from "@/domain/carrier/enterprise/events/OrderStatusChangedEvent";
 import { SendNotificationUseCase } from "../useCases/SendNotification";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class OnOrderStatusChanged implements EventHandler {
 
     constructor(

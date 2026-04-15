@@ -6,6 +6,7 @@ import { PrismaService } from "../prisma.service";
 import { PrismaOrderMapper } from "../mappers/PrismaOrderMapper";
 import { Prisma } from "prisma/generated/client";
 import { Order as PrismaOrder } from "prisma/generated/client";
+import { DomainEvents } from "@/core/events/DomainEvents";
 
 @Injectable()
 export class PrismaOrderRepository implements OrderRepository {
@@ -41,6 +42,8 @@ export class PrismaOrderRepository implements OrderRepository {
             },
             data
         });
+
+        DomainEvents.dispatchEventsForAggregate(order.id); // Need to refactor to send a notification only if the status was changed and not on every edit order
     }
 
     async delete(order: Order): Promise<void> {

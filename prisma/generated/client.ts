@@ -49,3 +49,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Order = Prisma.OrderModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
