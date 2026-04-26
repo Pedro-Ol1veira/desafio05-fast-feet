@@ -37,10 +37,13 @@ import { FetchCarryingOrdersController } from "./controller/FetchCarryingOrders.
 import { FetchCarryingOrdersUseCase } from "@/domain/carrier/application/useCases/Carrying/FetchCarryingOrdersUseCase";
 import { FindManyNearByController } from "./controller/FindManyNearBy.controller";
 import { FindManyOrdersNearByUseCase } from "@/domain/carrier/application/useCases/Carrying/FindManyOrdersNearByUseCase";
+import { StorageModule } from "../storage/storage.module";
+import { UploadAttachmentController } from "./controller/UploadAttachment.controller";
+import { UploadAndCreateAttachmentUseCase } from "@/domain/carrier/application/useCases/Carrying/UploadAndCreateAttachmentUseCase";
 
 
 @Module({
-    imports: [DatabaseModule, CryptographyModule],
+    imports: [DatabaseModule, CryptographyModule, StorageModule],
     controllers: [
         RegisterUserController,
         AuthenticateAdminController,
@@ -58,6 +61,7 @@ import { FindManyOrdersNearByUseCase } from "@/domain/carrier/application/useCas
         AuthenticateCarryingController,
         FindManyNearByController,
         FetchCarryingOrdersController,
+        UploadAttachmentController,
     ],
     providers: [
         CreateCarryingUseCase,
@@ -79,7 +83,8 @@ import { FindManyOrdersNearByUseCase } from "@/domain/carrier/application/useCas
         ReturnedOrderUseCase,
         AuthenticateCarryingUseCase,
         FetchCarryingOrdersUseCase,
-        FindManyOrdersNearByUseCase
+        FindManyOrdersNearByUseCase,
+        UploadAndCreateAttachmentUseCase
     ]
 })
 export class HttpModule {}

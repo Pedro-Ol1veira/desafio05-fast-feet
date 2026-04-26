@@ -258,6 +258,7 @@ export type OrderWhereInput = {
   customerId?: Prisma.StringFilter<"Order"> | string
   carrying?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   customer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  attachments?: Prisma.AttachmentListRelationFilter
 }
 
 export type OrderOrderByWithRelationInput = {
@@ -272,6 +273,7 @@ export type OrderOrderByWithRelationInput = {
   customerId?: Prisma.SortOrder
   carrying?: Prisma.UserOrderByWithRelationInput
   customer?: Prisma.UserOrderByWithRelationInput
+  attachments?: Prisma.AttachmentOrderByRelationAggregateInput
 }
 
 export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -289,6 +291,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   customerId?: Prisma.StringFilter<"Order"> | string
   carrying?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   customer?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  attachments?: Prisma.AttachmentListRelationFilter
 }, "id">
 
 export type OrderOrderByWithAggregationInput = {
@@ -333,6 +336,7 @@ export type OrderCreateInput = {
   complement: string
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type OrderUncheckedCreateInput = {
   complement: string
   carryingId?: string | null
   customerId: string
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUpdateInput = {
@@ -357,6 +362,7 @@ export type OrderUpdateInput = {
   complement?: Prisma.StringFieldUpdateOperationsInput | string
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateInput = {
@@ -369,6 +375,7 @@ export type OrderUncheckedUpdateInput = {
   complement?: Prisma.StringFieldUpdateOperationsInput | string
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderCreateManyInput = {
@@ -461,6 +468,11 @@ export type OrderSumOrderByAggregateInput = {
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
   number?: Prisma.SortOrder
+}
+
+export type OrderNullableScalarRelationFilter = {
+  is?: Prisma.OrderWhereInput | null
+  isNot?: Prisma.OrderWhereInput | null
 }
 
 export type OrderCreateNestedManyWithoutCarryingInput = {
@@ -571,6 +583,22 @@ export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
 }
 
+export type OrderCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutAttachmentsInput, Prisma.OrderUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.OrderWhereUniqueInput
+}
+
+export type OrderUpdateOneWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.OrderCreateWithoutAttachmentsInput, Prisma.OrderUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.OrderCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.OrderUpsertWithoutAttachmentsInput
+  disconnect?: Prisma.OrderWhereInput | boolean
+  delete?: Prisma.OrderWhereInput | boolean
+  connect?: Prisma.OrderWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.OrderUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.OrderUpdateWithoutAttachmentsInput>, Prisma.OrderUncheckedUpdateWithoutAttachmentsInput>
+}
+
 export type OrderCreateWithoutCarryingInput = {
   id?: string
   status?: $Enums.OrderStatus | null
@@ -580,6 +608,7 @@ export type OrderCreateWithoutCarryingInput = {
   number: number
   complement: string
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutCarryingInput = {
@@ -591,6 +620,7 @@ export type OrderUncheckedCreateWithoutCarryingInput = {
   number: number
   complement: string
   customerId: string
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutCarryingInput = {
@@ -612,6 +642,7 @@ export type OrderCreateWithoutCustomerInput = {
   number: number
   complement: string
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
+  attachments?: Prisma.AttachmentCreateNestedManyWithoutOrderInput
 }
 
 export type OrderUncheckedCreateWithoutCustomerInput = {
@@ -623,6 +654,7 @@ export type OrderUncheckedCreateWithoutCustomerInput = {
   number: number
   complement: string
   carryingId?: string | null
+  attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrderInput
 }
 
 export type OrderCreateOrConnectWithoutCustomerInput = {
@@ -682,6 +714,70 @@ export type OrderUpdateManyWithWhereWithoutCustomerInput = {
   data: Prisma.XOR<Prisma.OrderUpdateManyMutationInput, Prisma.OrderUncheckedUpdateManyWithoutCustomerInput>
 }
 
+export type OrderCreateWithoutAttachmentsInput = {
+  id?: string
+  status?: $Enums.OrderStatus | null
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
+  carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
+  customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
+}
+
+export type OrderUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  status?: $Enums.OrderStatus | null
+  latitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude: runtime.Decimal | runtime.DecimalJsLike | number | string
+  street: string
+  number: number
+  complement: string
+  carryingId?: string | null
+  customerId: string
+}
+
+export type OrderCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.OrderWhereUniqueInput
+  create: Prisma.XOR<Prisma.OrderCreateWithoutAttachmentsInput, Prisma.OrderUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type OrderUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.OrderUpdateWithoutAttachmentsInput, Prisma.OrderUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.OrderCreateWithoutAttachmentsInput, Prisma.OrderUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.OrderWhereInput
+}
+
+export type OrderUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.OrderWhereInput
+  data: Prisma.XOR<Prisma.OrderUpdateWithoutAttachmentsInput, Prisma.OrderUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type OrderUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
+  carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
+  customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
+}
+
+export type OrderUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.NullableEnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus | null
+  latitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  longitude?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
+  street?: Prisma.StringFieldUpdateOperationsInput | string
+  number?: Prisma.IntFieldUpdateOperationsInput | number
+  complement?: Prisma.StringFieldUpdateOperationsInput | string
+  carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  customerId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
 export type OrderCreateManyCarryingInput = {
   id?: string
   status?: $Enums.OrderStatus | null
@@ -713,6 +809,7 @@ export type OrderUpdateWithoutCarryingInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutCarryingInput = {
@@ -724,6 +821,7 @@ export type OrderUncheckedUpdateWithoutCarryingInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateManyWithoutCarryingInput = {
@@ -746,6 +844,7 @@ export type OrderUpdateWithoutCustomerInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
+  attachments?: Prisma.AttachmentUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateWithoutCustomerInput = {
@@ -757,6 +856,7 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrderNestedInput
 }
 
 export type OrderUncheckedUpdateManyWithoutCustomerInput = {
@@ -771,6 +871,35 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
 }
 
 
+/**
+ * Count Type OrderCountOutputType
+ */
+
+export type OrderCountOutputType = {
+  attachments: number
+}
+
+export type OrderCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attachments?: boolean | OrderCountOutputTypeCountAttachmentsArgs
+}
+
+/**
+ * OrderCountOutputType without action
+ */
+export type OrderCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the OrderCountOutputType
+   */
+  select?: Prisma.OrderCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * OrderCountOutputType without action
+ */
+export type OrderCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AttachmentWhereInput
+}
+
 
 export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -784,6 +913,8 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  attachments?: boolean | Prisma.Order$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["order"]>
 
 export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -830,6 +961,8 @@ export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  attachments?: boolean | Prisma.Order$attachmentsArgs<ExtArgs>
+  _count?: boolean | Prisma.OrderCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type OrderIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -845,6 +978,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     carrying: Prisma.$UserPayload<ExtArgs> | null
     customer: Prisma.$UserPayload<ExtArgs>
+    attachments: Prisma.$AttachmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1252,6 +1386,7 @@ export interface Prisma__OrderClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   carrying<T extends Prisma.Order$carryingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$carryingArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   customer<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  attachments<T extends Prisma.Order$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Order$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1707,6 +1842,30 @@ export type Order$carryingArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   include?: Prisma.UserInclude<ExtArgs> | null
   where?: Prisma.UserWhereInput
+}
+
+/**
+ * Order.attachments
+ */
+export type Order$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Attachment
+   */
+  select?: Prisma.AttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Attachment
+   */
+  omit?: Prisma.AttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AttachmentInclude<ExtArgs> | null
+  where?: Prisma.AttachmentWhereInput
+  orderBy?: Prisma.AttachmentOrderByWithRelationInput | Prisma.AttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.AttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AttachmentScalarFieldEnum | Prisma.AttachmentScalarFieldEnum[]
 }
 
 /**

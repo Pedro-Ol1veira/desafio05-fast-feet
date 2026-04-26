@@ -34,17 +34,18 @@ model User {
 }
 
 model Order {
-  id         String       @unique @default(uuid())
-  status     OrderStatus?
-  latitude   Decimal
-  longitude  Decimal
-  street     String
-  number     Int
-  complement String
-  carrying   User?        @relation("CarryingRelation", fields: [carryingId], references: [id])
-  customer   User         @relation("CustomerRelation", fields: [customerId], references: [id])
-  carryingId String?
-  customerId String
+  id          String       @unique @default(uuid())
+  status      OrderStatus?
+  latitude    Decimal
+  longitude   Decimal
+  street      String
+  number      Int
+  complement  String
+  carrying    User?        @relation("CarryingRelation", fields: [carryingId], references: [id])
+  customer    User         @relation("CustomerRelation", fields: [customerId], references: [id])
+  carryingId  String?
+  customerId  String
+  attachments Attachment[]
 }
 
 model Notification {
@@ -54,6 +55,15 @@ model Notification {
   createdAt   DateTime  @default(now())
   readAt      DateTime?
   recipientId String
+
+  recipient User @relation(fields: [recipientId], references: [id])
+}
+
+model Attachment {
+  id      String @unique @default(uuid())
+  title   String
+  url     String
+  orderId String?
   
-  recipient   User      @relation(fields: [recipientId], references: [id])
+  order   Order?  @relation(fields: [orderId], references: [id])
 }

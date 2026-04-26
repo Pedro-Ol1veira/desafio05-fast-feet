@@ -54,3 +54,8 @@ export type Order = Prisma.OrderModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model Attachment
+ * 
+ */
+export type Attachment = Prisma.AttachmentModel

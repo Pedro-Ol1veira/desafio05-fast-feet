@@ -1,7 +1,7 @@
 import { PrismaPg } from "@prisma/adapter-pg";
 import { execSync } from "child_process";
 import { randomUUID } from "crypto";
-import { PrismaClient } from "prisma/generated/client";
+import { PrismaClient } from "@/../prisma/generated/client";
 import { config } from 'dotenv';
 
 config({ path: '.env', override: true });
