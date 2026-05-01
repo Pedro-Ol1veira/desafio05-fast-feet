@@ -10,7 +10,7 @@ export interface OrderProps {
     customerId: UniqueEntityId;
     status?: OrderStatus | null;
     address: Address;
-    attachment?: string | null;
+    attachment?: UniqueEntityId | null;
 }
 
 export class Order extends AggregateRoot<OrderProps> {
@@ -31,7 +31,7 @@ export class Order extends AggregateRoot<OrderProps> {
         return this.props.status;
     }
 
-    get attachment(): string | undefined | null {
+    get attachment(): UniqueEntityId | undefined | null {
         return this.props.attachment;
     }
 
@@ -54,7 +54,7 @@ export class Order extends AggregateRoot<OrderProps> {
     }
 
     set attachment(id: string) {
-        this.props.attachment = id;
+        this.props.attachment = new UniqueEntityId(id);
     }
 
     static create(props: OrderProps, id?: UniqueEntityId) {
