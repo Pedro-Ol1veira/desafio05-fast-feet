@@ -10,4 +10,10 @@ export class InMemoryAttachmentRepository extends AttachmentRepository {
         this.items.push(attachment);
     }
 
+    async findById(id: string): Promise<Attachment | null> {
+        const attachment = this.items.find(item => item.id.toString() === id);
+        if(!attachment) return null;
+
+        return attachment;
+    }
 }

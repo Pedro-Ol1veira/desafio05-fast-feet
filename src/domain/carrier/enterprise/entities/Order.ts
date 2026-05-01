@@ -10,6 +10,7 @@ export interface OrderProps {
     customerId: UniqueEntityId;
     status?: OrderStatus | null;
     address: Address;
+    attachment?: string | null;
 }
 
 export class Order extends AggregateRoot<OrderProps> {
@@ -30,6 +31,10 @@ export class Order extends AggregateRoot<OrderProps> {
         return this.props.status;
     }
 
+    get attachment(): string | undefined | null {
+        return this.props.attachment;
+    }
+
     set carryingId(id: UniqueEntityId) {
         this.props.carryingId = id;
     };
@@ -46,6 +51,10 @@ export class Order extends AggregateRoot<OrderProps> {
         this.props.status = status;
 
         this.addDomainEvent(new OrderStatusChangedEvent(this));
+    }
+
+    set attachment(id: string) {
+        this.props.attachment = id;
     }
 
     static create(props: OrderProps, id?: UniqueEntityId) {
