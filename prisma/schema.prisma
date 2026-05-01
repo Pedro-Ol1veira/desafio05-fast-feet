@@ -41,6 +41,7 @@ model Order {
   street      String
   number      Int
   complement  String
+  attachment  String?
   carrying    User?        @relation("CarryingRelation", fields: [carryingId], references: [id])
   customer    User         @relation("CustomerRelation", fields: [customerId], references: [id])
   carryingId  String?
@@ -60,10 +61,10 @@ model Notification {
 }
 
 model Attachment {
-  id      String @unique @default(uuid())
+  id      String  @unique @default(uuid())
   title   String
   url     String
   orderId String?
-  
-  order   Order?  @relation(fields: [orderId], references: [id])
+
+  order Order? @relation(fields: [orderId], references: [id])
 }

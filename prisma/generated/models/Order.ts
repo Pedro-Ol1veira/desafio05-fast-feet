@@ -46,6 +46,7 @@ export type OrderMinAggregateOutputType = {
   street: string | null
   number: number | null
   complement: string | null
+  attachment: string | null
   carryingId: string | null
   customerId: string | null
 }
@@ -58,6 +59,7 @@ export type OrderMaxAggregateOutputType = {
   street: string | null
   number: number | null
   complement: string | null
+  attachment: string | null
   carryingId: string | null
   customerId: string | null
 }
@@ -70,6 +72,7 @@ export type OrderCountAggregateOutputType = {
   street: number
   number: number
   complement: number
+  attachment: number
   carryingId: number
   customerId: number
   _all: number
@@ -96,6 +99,7 @@ export type OrderMinAggregateInputType = {
   street?: true
   number?: true
   complement?: true
+  attachment?: true
   carryingId?: true
   customerId?: true
 }
@@ -108,6 +112,7 @@ export type OrderMaxAggregateInputType = {
   street?: true
   number?: true
   complement?: true
+  attachment?: true
   carryingId?: true
   customerId?: true
 }
@@ -120,6 +125,7 @@ export type OrderCountAggregateInputType = {
   street?: true
   number?: true
   complement?: true
+  attachment?: true
   carryingId?: true
   customerId?: true
   _all?: true
@@ -219,6 +225,7 @@ export type OrderGroupByOutputType = {
   street: string
   number: number
   complement: string
+  attachment: string | null
   carryingId: string | null
   customerId: string
   _count: OrderCountAggregateOutputType | null
@@ -254,6 +261,7 @@ export type OrderWhereInput = {
   street?: Prisma.StringFilter<"Order"> | string
   number?: Prisma.IntFilter<"Order"> | number
   complement?: Prisma.StringFilter<"Order"> | string
+  attachment?: Prisma.StringNullableFilter<"Order"> | string | null
   carryingId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerId?: Prisma.StringFilter<"Order"> | string
   carrying?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -269,6 +277,7 @@ export type OrderOrderByWithRelationInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  attachment?: Prisma.SortOrderInput | Prisma.SortOrder
   carryingId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
   carrying?: Prisma.UserOrderByWithRelationInput
@@ -287,6 +296,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   street?: Prisma.StringFilter<"Order"> | string
   number?: Prisma.IntFilter<"Order"> | number
   complement?: Prisma.StringFilter<"Order"> | string
+  attachment?: Prisma.StringNullableFilter<"Order"> | string | null
   carryingId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerId?: Prisma.StringFilter<"Order"> | string
   carrying?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -302,6 +312,7 @@ export type OrderOrderByWithAggregationInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  attachment?: Prisma.SortOrderInput | Prisma.SortOrder
   carryingId?: Prisma.SortOrderInput | Prisma.SortOrder
   customerId?: Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
@@ -322,6 +333,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   street?: Prisma.StringWithAggregatesFilter<"Order"> | string
   number?: Prisma.IntWithAggregatesFilter<"Order"> | number
   complement?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  attachment?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   carryingId?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   customerId?: Prisma.StringWithAggregatesFilter<"Order"> | string
 }
@@ -334,6 +346,7 @@ export type OrderCreateInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
   attachments?: Prisma.AttachmentCreateNestedManyWithoutOrderInput
@@ -347,6 +360,7 @@ export type OrderUncheckedCreateInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carryingId?: string | null
   customerId: string
   attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrderInput
@@ -360,6 +374,7 @@ export type OrderUpdateInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
   attachments?: Prisma.AttachmentUpdateManyWithoutOrderNestedInput
@@ -373,6 +388,7 @@ export type OrderUncheckedUpdateInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrderNestedInput
@@ -386,6 +402,7 @@ export type OrderCreateManyInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carryingId?: string | null
   customerId: string
 }
@@ -398,6 +415,7 @@ export type OrderUpdateManyMutationInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type OrderUncheckedUpdateManyInput = {
@@ -408,6 +426,7 @@ export type OrderUncheckedUpdateManyInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -430,6 +449,7 @@ export type OrderCountOrderByAggregateInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  attachment?: Prisma.SortOrder
   carryingId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
 }
@@ -448,6 +468,7 @@ export type OrderMaxOrderByAggregateInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  attachment?: Prisma.SortOrder
   carryingId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
 }
@@ -460,6 +481,7 @@ export type OrderMinOrderByAggregateInput = {
   street?: Prisma.SortOrder
   number?: Prisma.SortOrder
   complement?: Prisma.SortOrder
+  attachment?: Prisma.SortOrder
   carryingId?: Prisma.SortOrder
   customerId?: Prisma.SortOrder
 }
@@ -607,6 +629,7 @@ export type OrderCreateWithoutCarryingInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
   attachments?: Prisma.AttachmentCreateNestedManyWithoutOrderInput
 }
@@ -619,6 +642,7 @@ export type OrderUncheckedCreateWithoutCarryingInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   customerId: string
   attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrderInput
 }
@@ -641,6 +665,7 @@ export type OrderCreateWithoutCustomerInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
   attachments?: Prisma.AttachmentCreateNestedManyWithoutOrderInput
 }
@@ -653,6 +678,7 @@ export type OrderUncheckedCreateWithoutCustomerInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carryingId?: string | null
   attachments?: Prisma.AttachmentUncheckedCreateNestedManyWithoutOrderInput
 }
@@ -694,6 +720,7 @@ export type OrderScalarWhereInput = {
   street?: Prisma.StringFilter<"Order"> | string
   number?: Prisma.IntFilter<"Order"> | number
   complement?: Prisma.StringFilter<"Order"> | string
+  attachment?: Prisma.StringNullableFilter<"Order"> | string | null
   carryingId?: Prisma.StringNullableFilter<"Order"> | string | null
   customerId?: Prisma.StringFilter<"Order"> | string
 }
@@ -722,6 +749,7 @@ export type OrderCreateWithoutAttachmentsInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carrying?: Prisma.UserCreateNestedOneWithoutOrdersAsCarryingInput
   customer: Prisma.UserCreateNestedOneWithoutOrdersAsCustomerInput
 }
@@ -734,6 +762,7 @@ export type OrderUncheckedCreateWithoutAttachmentsInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carryingId?: string | null
   customerId: string
 }
@@ -762,6 +791,7 @@ export type OrderUpdateWithoutAttachmentsInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
 }
@@ -774,6 +804,7 @@ export type OrderUncheckedUpdateWithoutAttachmentsInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -786,6 +817,7 @@ export type OrderCreateManyCarryingInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   customerId: string
 }
 
@@ -797,6 +829,7 @@ export type OrderCreateManyCustomerInput = {
   street: string
   number: number
   complement: string
+  attachment?: string | null
   carryingId?: string | null
 }
 
@@ -808,6 +841,7 @@ export type OrderUpdateWithoutCarryingInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customer?: Prisma.UserUpdateOneRequiredWithoutOrdersAsCustomerNestedInput
   attachments?: Prisma.AttachmentUpdateManyWithoutOrderNestedInput
 }
@@ -820,6 +854,7 @@ export type OrderUncheckedUpdateWithoutCarryingInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
   attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrderNestedInput
 }
@@ -832,6 +867,7 @@ export type OrderUncheckedUpdateManyWithoutCarryingInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   customerId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -843,6 +879,7 @@ export type OrderUpdateWithoutCustomerInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carrying?: Prisma.UserUpdateOneWithoutOrdersAsCarryingNestedInput
   attachments?: Prisma.AttachmentUpdateManyWithoutOrderNestedInput
 }
@@ -855,6 +892,7 @@ export type OrderUncheckedUpdateWithoutCustomerInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attachments?: Prisma.AttachmentUncheckedUpdateManyWithoutOrderNestedInput
 }
@@ -867,6 +905,7 @@ export type OrderUncheckedUpdateManyWithoutCustomerInput = {
   street?: Prisma.StringFieldUpdateOperationsInput | string
   number?: Prisma.IntFieldUpdateOperationsInput | number
   complement?: Prisma.StringFieldUpdateOperationsInput | string
+  attachment?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   carryingId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
@@ -909,6 +948,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   street?: boolean
   number?: boolean
   complement?: boolean
+  attachment?: boolean
   carryingId?: boolean
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -925,6 +965,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   street?: boolean
   number?: boolean
   complement?: boolean
+  attachment?: boolean
   carryingId?: boolean
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -939,6 +980,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   street?: boolean
   number?: boolean
   complement?: boolean
+  attachment?: boolean
   carryingId?: boolean
   customerId?: boolean
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
@@ -953,11 +995,12 @@ export type OrderSelectScalar = {
   street?: boolean
   number?: boolean
   complement?: boolean
+  attachment?: boolean
   carryingId?: boolean
   customerId?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "latitude" | "longitude" | "street" | "number" | "complement" | "carryingId" | "customerId", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "status" | "latitude" | "longitude" | "street" | "number" | "complement" | "attachment" | "carryingId" | "customerId", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   carrying?: boolean | Prisma.Order$carryingArgs<ExtArgs>
   customer?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -988,6 +1031,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     street: string
     number: number
     complement: string
+    attachment: string | null
     carryingId: string | null
     customerId: string
   }, ExtArgs["result"]["order"]>
@@ -1423,6 +1467,7 @@ export interface OrderFieldRefs {
   readonly street: Prisma.FieldRef<"Order", 'String'>
   readonly number: Prisma.FieldRef<"Order", 'Int'>
   readonly complement: Prisma.FieldRef<"Order", 'String'>
+  readonly attachment: Prisma.FieldRef<"Order", 'String'>
   readonly carryingId: Prisma.FieldRef<"Order", 'String'>
   readonly customerId: Prisma.FieldRef<"Order", 'String'>
 }

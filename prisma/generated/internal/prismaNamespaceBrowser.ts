@@ -93,6 +93,7 @@ export const OrderScalarFieldEnum = {
   street: 'street',
   number: 'number',
   complement: 'complement',
+  attachment: 'attachment',
   carryingId: 'carryingId',
   customerId: 'customerId'
 } as const

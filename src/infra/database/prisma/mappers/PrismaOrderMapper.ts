@@ -15,7 +15,8 @@ export class PrismaOrderMapper {
             }),
             customerId: new UniqueEntityId(raw.customerId),
             carryingId: raw.carryingId ? new UniqueEntityId(raw.carryingId) : null,
-            status: raw.status
+            status: raw.status,
+            attachment: raw.attachment ? new UniqueEntityId(raw.attachment) : null,
         }, new UniqueEntityId(raw.id))
     }
 
@@ -29,7 +30,8 @@ export class PrismaOrderMapper {
             street: order.address.street,
             customerId: order.customerId.toString(),
             carryingId: order.carryingId?.toString(),
-            status: order.status
+            status: order.status,
+            attachment: order.attachment?.toString(),
         }
     }
 }
